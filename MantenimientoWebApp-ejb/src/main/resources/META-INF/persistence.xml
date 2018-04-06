@@ -2,24 +2,26 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>sv.edu.uesocc.ingenieria.DetalleOrdenTrabajo</class>
-    <class>sv.edu.uesocc.ingenieria.Responsable</class>
-    <class>sv.edu.uesocc.ingenieria.Estado</class>
-    <class>sv.edu.uesocc.ingenieria.Calendario</class>
-    <class>sv.edu.uesocc.ingenieria.Parte</class>
-    <class>sv.edu.uesocc.ingenieria.Diagnostico</class>
-    <class>sv.edu.uesocc.ingenieria.Unidad</class>
-    <class>sv.edu.uesocc.ingenieria.SubtipoMtto</class>
-    <class>sv.edu.uesocc.ingenieria.OrdenTrabajo</class>
-    <class>sv.edu.uesocc.ingenieria.ExcepcionCalendario</class>
-    <class>sv.edu.uesocc.ingenieria.MttoDetalle</class>
-    <class>sv.edu.uesocc.ingenieria.Procedimiento</class>
-    <class>sv.edu.uesocc.ingenieria.Prioridad</class>
-    <class>sv.edu.uesocc.ingenieria.Pasos</class>
-    <class>sv.edu.uesocc.ingenieria.Solicitud</class>
-    <class>sv.edu.uesocc.ingenieria.Tipomtto</class>
-    <class>sv.edu.uesocc.ingenieria.Equipo</class>
-    <class>sv.edu.uesocc.ingenieria.DiagnosticoParte</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Calendario</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.DetalleOrdenTrabajo</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Diagnostico</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.DiagnosticoParte</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Equipo</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Estado</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.EstadoDetalleOrdenTrabajo</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.ExcepcionCalendario</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.MttoDetalle</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.OrdenTrabajo</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Parte</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Pasos</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.PasosProcedimiento</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Prioridad</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Procedimiento</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Responsable</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Solicitud</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.SubtipoMtto</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Tipomtto</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Unidad</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/mantenimiento"/>
