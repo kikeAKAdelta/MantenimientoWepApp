@@ -22,20 +22,45 @@ public abstract class AbstractFacade<T> {
 
     protected abstract EntityManager getEntityManager();
 
-    public void create(T entity) {
+    public T create(T entity) {
         getEntityManager().persist(entity);
+        return entity;
     }
 
-    public void edit(T entity) {
+    public T edit(T entity) {
         getEntityManager().merge(entity);
+        return entity;
     }
 
-    public void remove(T entity) {
+    public T remove(T entity) {
         getEntityManager().remove(getEntityManager().merge(entity));
+        return entity;
     }
 
     public T find(Object id) {
         return getEntityManager().find(entityClass, id);
+    }
+    
+    public boolean crear(T entity){
+        
+        if (entity!= null && getEntityManager()!=null) {
+            return create(entity)==entity;
+        }
+        return false;
+    }
+    
+    public boolean modificar(T entity){
+        if (entity!= null && getEntityManager()!=null) {
+            return edit(entity)==entity;
+        }
+        return false;
+    }
+    
+    public boolean eliminar(T entity){
+        if (entity!= null && getEntityManager()!=null) {
+            return remove(entity)==entity;
+        }
+        return false;
     }
 
     public List<T> findAll() {
@@ -60,5 +85,6 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
+    
     
 }

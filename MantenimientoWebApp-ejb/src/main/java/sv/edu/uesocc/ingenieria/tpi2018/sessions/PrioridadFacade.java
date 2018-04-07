@@ -15,7 +15,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.entidades.Prioridad;
  * @author ricky
  */
 @Stateless
-public class PrioridadFacade extends AbstractFacade<Prioridad> implements PrioridadFacadeLocal {
+public class PrioridadFacade extends AbstractFacade<Prioridad> implements AbstractFacadeInterface<Prioridad> {
 
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;

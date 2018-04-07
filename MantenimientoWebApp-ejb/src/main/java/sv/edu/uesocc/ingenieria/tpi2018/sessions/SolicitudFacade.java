@@ -15,7 +15,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.entidades.Solicitud;
  * @author ricky
  */
 @Stateless
-public class SolicitudFacade extends AbstractFacade<Solicitud> implements SolicitudFacadeLocal {
+public class SolicitudFacade extends AbstractFacade<Solicitud> implements AbstractFacadeInterface<Solicitud> {
 
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;

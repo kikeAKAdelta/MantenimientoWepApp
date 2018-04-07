@@ -15,7 +15,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.entidades.ExcepcionCalendario;
  * @author ricky
  */
 @Stateless
-public class ExcepcionCalendarioFacade extends AbstractFacade<ExcepcionCalendario> implements ExcepcionCalendarioFacadeLocal {
+public class ExcepcionCalendarioFacade extends AbstractFacade<ExcepcionCalendario> implements AbstractFacadeInterface<ExcepcionCalendario> {
 
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;

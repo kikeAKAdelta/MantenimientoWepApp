@@ -15,7 +15,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.entidades.EstadoDetalleOrdenTrabajo;
  * @author ricky
  */
 @Stateless
-public class EstadoDetalleOrdenTrabajoFacade extends AbstractFacade<EstadoDetalleOrdenTrabajo> implements EstadoDetalleOrdenTrabajoFacadeLocal {
+public class EstadoDetalleOrdenTrabajoFacade extends AbstractFacade<EstadoDetalleOrdenTrabajo> implements AbstractFacadeInterface<EstadoDetalleOrdenTrabajo> {
 
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;

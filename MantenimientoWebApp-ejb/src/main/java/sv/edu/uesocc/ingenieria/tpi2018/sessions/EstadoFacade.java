@@ -15,7 +15,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.entidades.Estado;
  * @author ricky
  */
 @Stateless
-public class EstadoFacade extends AbstractFacade<Estado> implements EstadoFacadeLocal {
+public class EstadoFacade extends AbstractFacade<Estado> implements AbstractFacadeInterface<Estado> {
 
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;

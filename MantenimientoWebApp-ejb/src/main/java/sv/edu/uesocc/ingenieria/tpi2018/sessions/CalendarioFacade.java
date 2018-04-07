@@ -15,7 +15,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.entidades.Calendario;
  * @author ricky
  */
 @Stateless
-public class CalendarioFacade extends AbstractFacade<Calendario> implements CalendarioFacadeLocal {
+public class CalendarioFacade extends AbstractFacade<Calendario> implements AbstractFacadeInterface<Calendario> {
 
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;

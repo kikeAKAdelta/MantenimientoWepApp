@@ -15,7 +15,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.entidades.SubtipoMtto;
  * @author ricky
  */
 @Stateless
-public class SubtipoMttoFacade extends AbstractFacade<SubtipoMtto> implements SubtipoMttoFacadeLocal {
+public class SubtipoMttoFacade extends AbstractFacade<SubtipoMtto> implements AbstractFacadeInterface<SubtipoMtto> {
 
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;

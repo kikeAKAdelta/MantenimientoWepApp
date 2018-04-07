@@ -15,7 +15,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.entidades.PasosProcedimiento;
  * @author ricky
  */
 @Stateless
-public class PasosProcedimientoFacade extends AbstractFacade<PasosProcedimiento> implements PasosProcedimientoFacadeLocal {
+public class PasosProcedimientoFacade extends AbstractFacade<PasosProcedimiento> implements AbstractFacadeInterface<PasosProcedimiento> {
 
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;

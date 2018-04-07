@@ -15,7 +15,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.entidades.Unidad;
  * @author ricky
  */
 @Stateless
-public class UnidadFacade extends AbstractFacade<Unidad> implements UnidadFacadeLocal {
+public class UnidadFacade extends AbstractFacade<Unidad> implements AbstractFacadeInterface<Unidad> {
 
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;

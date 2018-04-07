@@ -15,7 +15,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.entidades.Tipomtto;
  * @author ricky
  */
 @Stateless
-public class TipomttoFacade extends AbstractFacade<Tipomtto> implements TipomttoFacadeLocal {
+public class TipomttoFacade extends AbstractFacade<Tipomtto> implements AbstractFacadeInterface<Tipomtto> {
 
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;

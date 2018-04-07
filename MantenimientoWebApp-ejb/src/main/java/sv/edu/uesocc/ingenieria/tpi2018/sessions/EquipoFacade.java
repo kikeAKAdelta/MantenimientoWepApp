@@ -15,7 +15,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.entidades.Equipo;
  * @author ricky
  */
 @Stateless
-public class EquipoFacade extends AbstractFacade<Equipo> implements EquipoFacadeLocal {
+public class EquipoFacade extends AbstractFacade<Equipo> implements AbstractFacadeInterface<Equipo> {
 
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;

@@ -15,7 +15,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.entidades.OrdenTrabajo;
  * @author ricky
  */
 @Stateless
-public class OrdenTrabajoFacade extends AbstractFacade<OrdenTrabajo> implements OrdenTrabajoFacadeLocal {
+public class OrdenTrabajoFacade extends AbstractFacade<OrdenTrabajo> implements AbstractFacadeInterface<OrdenTrabajo> {
 
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
