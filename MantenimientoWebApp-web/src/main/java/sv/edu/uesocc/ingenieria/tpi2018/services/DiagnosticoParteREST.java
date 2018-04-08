@@ -19,19 +19,19 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import sv.edu.uesocc.ingenieria.tpi2018.entidades.Calendario;
-import sv.edu.uesocc.ingenieria.tpi2018.sessions.CalendarioFacadeLocal;
+import sv.edu.uesocc.ingenieria.tpi2018.entidades.DiagnosticoParte;
+import sv.edu.uesocc.ingenieria.tpi2018.sessions.DiagnosticoParteFacade;
 
 /**
  *
  * @author ricky
  * Ricardo Barrientos
  */
-@Path("/calendario")
-public class CalendarioREST implements Serializable{
+@Path("/diagnosticoParte")
+public class DiagnosticoParteREST implements Serializable{
     
     @EJB 
-    private CalendarioFacadeLocal ejbCalendario;
+    private DiagnosticoParteFacade ejbDiagnosticoParte;
     
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-web_war_1.0-SNAPSHOTPU")
     private EntityManager em = null;
@@ -39,16 +39,16 @@ public class CalendarioREST implements Serializable{
     
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Calendario> findAll(){
-        List listaCalendario = null;
+    public List<DiagnosticoParte> findAll(){
+        List listaDP = null;
         try {
-            if(ejbCalendario != null){
-                return ejbCalendario.findAll();
+            if(ejbDiagnosticoParte != null){
+                return ejbDiagnosticoParte.findAll();
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
-        return listaCalendario;
+        return listaDP;
     }
     
     @Path("/count")
@@ -57,8 +57,8 @@ public class CalendarioREST implements Serializable{
     public Integer count() {
 
         try {
-            if (ejbCalendario != null) {
-                return ejbCalendario.count();
+            if (ejbDiagnosticoParte != null) {
+                return ejbDiagnosticoParte.count();
             }
 
         } catch (Exception e) {
@@ -68,26 +68,26 @@ public class CalendarioREST implements Serializable{
     }
     
     @GET
-    @Path("/{idCalendario}")
+    @Path("/{idDP}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Calendario findById(@PathParam("idCalendario") Integer idCalendario){
+    public DiagnosticoParte findById(@PathParam("idDP") Integer idDP){
         try {
-            if(ejbCalendario != null){
-                ejbCalendario.find(idCalendario);
+            if(ejbDiagnosticoParte != null){
+                ejbDiagnosticoParte.find(idDP);
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
-        return new Calendario();       
+        return new DiagnosticoParte();       
     }
     
-    @Path("/{idCalendario}")
+    @Path("/{idDP}")
     @DELETE
-    public Response remove (@PathParam("idCalendario") Integer idCalendario){
+    public Response remove (@PathParam("idDP") Integer idDP){
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
         try {
-            if(idCalendario != null && this.ejbCalendario != null){
-                ejbCalendario.remove(ejbCalendario.find(idCalendario));
+            if(idDP != null && this.ejbDiagnosticoParte != null){
+                ejbDiagnosticoParte.remove(ejbDiagnosticoParte.find(idDP));
                 respuesta = Response.status(Response.Status.OK).build();
             }
         } catch (Exception e) {
@@ -97,16 +97,16 @@ public class CalendarioREST implements Serializable{
     return respuesta;
     }
     
-    @Path("/{idCalendario}")
+    @Path("/{idDP}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(Calendario calendario){
+    public Response create(DiagnosticoParte dp){
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build(); 
         try {
-            if(ejbCalendario!=null){
-                ejbCalendario.create(calendario);
-                respuesta = Response.status(Response.Status.CREATED).entity(calendario).build();
+            if(ejbDiagnosticoParte!=null){
+                ejbDiagnosticoParte.create(dp);
+                respuesta = Response.status(Response.Status.CREATED).entity(dp).build();
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -116,13 +116,13 @@ public class CalendarioREST implements Serializable{
     }
     
     @PUT
-    @Path("/{idCalendario}")
+    @Path("/{idDP}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response edit(@PathParam("idCalendario") Integer idCalendario, Calendario calendario) {
+    public Response edit(@PathParam("idDP") Integer idDP, DiagnosticoParte dp) {
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
         try {
-            if (this.ejbCalendario != null) {
-                ejbCalendario.edit(calendario);
+            if (this.ejbDiagnosticoParte != null) {
+                ejbDiagnosticoParte.edit(dp);
                 respuesta = Response.status(Response.Status.OK).build();
             }
         } catch (Exception e) {

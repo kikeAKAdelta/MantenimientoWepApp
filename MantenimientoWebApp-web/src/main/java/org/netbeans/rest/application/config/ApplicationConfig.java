@@ -5,7 +5,6 @@
  */
 package org.netbeans.rest.application.config;
 
-import sv.edu.uesocc.ingenieria.tpi2018.services.CalendarioREST;
 import java.util.Set;
 import javax.ws.rs.core.Application;
 
@@ -31,6 +30,9 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(sv.edu.uesocc.ingenieria.tpi2018.services.CalendarioREST.class);
+        resources.add(sv.edu.uesocc.ingenieria.tpi2018.services.DetalleOrdenTrabajoREST.class);
+        resources.add(sv.edu.uesocc.ingenieria.tpi2018.services.DiagnosticoParteREST.class);
+        resources.add(sv.edu.uesocc.ingenieria.tpi2018.services.DiagnosticoREST.class);
     }
     
 }
