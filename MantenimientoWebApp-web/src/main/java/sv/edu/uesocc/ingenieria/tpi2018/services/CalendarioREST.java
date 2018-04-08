@@ -53,9 +53,9 @@ public class CalendarioREST implements Serializable{
         return listaCalendario;
     }
     
-    @Path("count")
+    @Path("/count")
     @GET
-    @Produces({MediaType.TEXT_PLAIN})
+    @Produces({MediaType.APPLICATION_JSON})
     public Integer count() {
 
         try {
@@ -70,7 +70,7 @@ public class CalendarioREST implements Serializable{
     }
     
     @GET
-    @Path("{idCalendario}")
+    @Path("/{idCalendario}")
     @Produces({MediaType.APPLICATION_JSON})
     public Calendario findById(@PathParam("idCalendario") Integer idCalendario){
         try {
@@ -83,7 +83,7 @@ public class CalendarioREST implements Serializable{
         return new Calendario();       
     }
     
-    @Path("{idCalendario}")
+    @Path("/{idCalendario}")
     @DELETE
     public Response remove (@PathParam("idCalendario") Integer idCalendario){
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
@@ -99,30 +99,38 @@ public class CalendarioREST implements Serializable{
     return respuesta;
     }
     
+    @Path("/{idCalendario}")
     @POST
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(Calendario calendario){
+        Response respuesta = Response.status(Response.Status.NOT_FOUND).build(); 
         try {
             if(ejbCalendario!=null){
                 ejbCalendario.create(calendario);
-            }
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-        }        
-        return Response.status(Response.Status.CREATED).entity(calendario).build();
-    }
-    
-    @PUT
-    @Path("{idCalendario}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void edit(@PathParam("idCalendario") Integer idCalendario, Calendario calendario) {
-        try {
-            if (this.ejbCalendario != null) {
-                ejbCalendario.edit(calendario);
+                respuesta = Response.status(Response.Status.CREATED).entity(calendario).build();
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
+        return respuesta;
+
+    }
+    
+    @PUT
+    @Path("/{idCalendario}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response edit(@PathParam("idCalendario") Integer idCalendario, Calendario calendario) {
+        Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
+        try {
+            if (this.ejbCalendario != null) {
+                ejbCalendario.edit(calendario);
+                respuesta = Response.status(Response.Status.OK).build();
+            }
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
+        return respuesta;
     }
 
 }
