@@ -24,10 +24,19 @@
     <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Unidad</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
+        <!--
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/mantenimiento"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.password" value="1234"/>
+      -->
+      <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:mantenimiento"/>
+      <property name="javax.persistence.jdbc.user" value="sa"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+      <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
 </persistence>
