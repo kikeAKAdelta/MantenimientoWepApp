@@ -57,7 +57,7 @@
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <warName>MantenimientoWebApp-web-1.0-SNAPSHOT</warName>
-                    <outputDirectory>MantenimientoWebApp-web/target/recursos/PayaraMicro</outputDirectory>
+                    <outputDirectory>MantenimientoWebApp-web/recursos/PayaraMicro</outputDirectory>
                 </configuration>
             </plugin>
             <plugin>
