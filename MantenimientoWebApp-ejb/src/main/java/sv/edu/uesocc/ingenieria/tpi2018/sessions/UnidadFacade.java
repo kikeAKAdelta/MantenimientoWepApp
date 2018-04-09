@@ -5,9 +5,12 @@
  */
 package sv.edu.uesocc.ingenieria.tpi2018.sessions;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import sv.edu.uesocc.ingenieria.tpi2018.entidades.Parte;
 import sv.edu.uesocc.ingenieria.tpi2018.entidades.Unidad;
 
 /**
@@ -27,6 +30,12 @@ public class UnidadFacade extends AbstractFacade<Unidad> implements AbstractFaca
 
     public UnidadFacade() {
         super(Unidad.class);
+    }
+    
+    public List<Unidad> findByName(String nameQuery,String value){
+        TypedQuery<Unidad> filtroNames=em.createNamedQuery(nameQuery,Unidad.class).setParameter("nombreUnidad", value);
+        List<Unidad> listaPartes=filtroNames.getResultList();
+        return listaPartes;
     }
     
 }

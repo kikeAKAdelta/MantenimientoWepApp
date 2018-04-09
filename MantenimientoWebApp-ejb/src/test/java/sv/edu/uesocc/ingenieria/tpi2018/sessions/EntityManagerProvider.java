@@ -22,7 +22,6 @@ public class EntityManagerProvider  implements TestRule{
         protected static EntityManager em;
         protected static EntityTransaction tx;
 
-//        @BeforeClass
         public EntityManagerProvider(){
             emf=Persistence.createEntityManagerFactory("sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU");
             em=emf.createEntityManager();
@@ -39,10 +38,18 @@ public class EntityManagerProvider  implements TestRule{
         @After
         public void cleanUp(){
             em.getTransaction().rollback();
+            em.clear();
         }
         
         @AfterClass
         public static void tearDown(){
+            em.clear();
+            em.close();
+            emf.close();
+        }
+        
+        @Before
+        public static void forClass(){
             em.clear();
             em.close();
             emf.close();
