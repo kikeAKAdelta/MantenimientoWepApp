@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU" transaction-type="JTA">
+    <jta-data-source>java:app/jdni_Mantenimiento</jta-data-source>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Calendario</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.DetalleOrdenTrabajo</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Diagnostico</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.DiagnosticoParte</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Equipo</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Estado</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.EstadoDetalleOrdenTrabajo</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.ExcepcionCalendario</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.MttoDetalle</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.OrdenTrabajo</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Parte</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Pasos</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.PasosProcedimiento</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Prioridad</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Procedimiento</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Responsable</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Solicitud</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.SubtipoMtto</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Tipomtto</class>
+    <class>sv.edu.uesocc.ingenieria.tpi2018.entidades.Unidad</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties/>
+  </persistence-unit>
+</persistence>
