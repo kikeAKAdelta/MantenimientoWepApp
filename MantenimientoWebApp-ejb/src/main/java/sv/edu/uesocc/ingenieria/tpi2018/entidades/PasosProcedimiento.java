@@ -33,12 +33,12 @@ public class PasosProcedimiento implements Serializable {
     
     @JoinColumn(name = "id_procedimiento", referencedColumnName = "id_procedimiento", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Procedimiento procedimiento;
+    private Integer procedimiento;
 
     public PasosProcedimiento(){}
 
-    public PasosProcedimiento(PasosProcedimientoPK pasosProcedimientoPK) {
-        this.pasosProcedimientoPK = pasosProcedimientoPK;
+    public PasosProcedimiento(Integer procedimiento) {
+        this.procedimiento = procedimiento;
     }
 
     public PasosProcedimientoPK getPasosProcedimientoPK() {
@@ -57,13 +57,15 @@ public class PasosProcedimiento implements Serializable {
         this.pasos = pasos;
     }
 
-    public Procedimiento getProcedimiento() {
+    public Integer getProcedimiento() {
         return procedimiento;
     }
 
-    public void setProcedimiento(Procedimiento procedimiento) {
+    public void setProcedimiento(Integer procedimiento) {
         this.procedimiento = procedimiento;
     }
+
+    
 
     @Override
     public int hashCode() {

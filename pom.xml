@@ -10,5 +10,6 @@
     <module>MantenimientoWebApp-ear</module>
     <module>MantenimientoWebApp-web</module>
     <module>MantenimientoWebApp-ejb</module>
+    <module>MantenimientoLib</module>
   </modules>
 </project>

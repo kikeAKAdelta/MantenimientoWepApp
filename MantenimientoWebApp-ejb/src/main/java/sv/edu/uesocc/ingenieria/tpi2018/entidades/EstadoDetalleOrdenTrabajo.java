@@ -34,12 +34,13 @@ public class EstadoDetalleOrdenTrabajo implements Serializable {
     
     @JoinColumn(name = "id_detalle_orden_trabajo", referencedColumnName = "id_detalle_orden_trabajo", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private DetalleOrdenTrabajo detalleOrdenTrabajo;
+    private Integer detalleOrdenTrabajo;
     
     public EstadoDetalleOrdenTrabajo(){}
 
-    public EstadoDetalleOrdenTrabajo(EstadoDetalleOrdenTrabajoPK estadoDetalleOrdenTrabajoPK) {
-        this.estadoDetalleOrdenTrabajoPK = estadoDetalleOrdenTrabajoPK;
+   
+    public EstadoDetalleOrdenTrabajo(Integer detalleOrdenTrabajo) {
+        this.detalleOrdenTrabajo = detalleOrdenTrabajo;
     }
 
     public EstadoDetalleOrdenTrabajoPK getEstadoDetalleOrdenTrabajoPK() {
@@ -58,13 +59,15 @@ public class EstadoDetalleOrdenTrabajo implements Serializable {
         this.estado = estado;
     }
 
-    public DetalleOrdenTrabajo getDetalleOrdenTrabajo() {
+    public Integer getDetalleOrdenTrabajo() {
         return detalleOrdenTrabajo;
     }
 
-    public void setDetalleOrdenTrabajo(DetalleOrdenTrabajo detalleOrdenTrabajo) {
+    public void setDetalleOrdenTrabajo(Integer detalleOrdenTrabajo) {
         this.detalleOrdenTrabajo = detalleOrdenTrabajo;
     }
+
+   
     
 
     @Override
