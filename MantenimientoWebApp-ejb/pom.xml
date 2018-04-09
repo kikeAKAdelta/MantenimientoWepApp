@@ -38,13 +38,13 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.mantenimiento.tpi</groupId>
+            <groupId>sv.edu.uesocc.ingenieria</groupId>
             <artifactId>MantenimientoLib</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>MantenimientoTPI2018-ejb</artifactId>
+            <artifactId>MantenimientoWebApp-ejb</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
@@ -99,6 +99,11 @@
         </plugins>
     </build>
     <repositories>
+         <repository>
+            <id>unknown-jars-temp-repo</id>
+            <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
+            <url>file:${project.basedir}/lib</url>
+        </repository>
     </repositories>
 
 </project>

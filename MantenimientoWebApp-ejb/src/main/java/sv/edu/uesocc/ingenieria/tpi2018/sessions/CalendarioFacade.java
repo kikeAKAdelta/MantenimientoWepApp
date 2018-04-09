@@ -8,15 +8,14 @@ package sv.edu.uesocc.ingenieria.tpi2018.sessions;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import sv.edu.uesocc.ingenieria.tpi2018.entidades.Calendario;
+import sv.edu.uesocc.ingenieria.mantenimientolib.Calendario;
 
 /**
  *
- * @author ricky
+ * @author david
  */
 @Stateless
 public class CalendarioFacade extends AbstractFacade<Calendario> implements CalendarioFacadeLocal {
-
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -28,5 +27,4 @@ public class CalendarioFacade extends AbstractFacade<Calendario> implements Cale
     public CalendarioFacade() {
         super(Calendario.class);
     }
-    
 }

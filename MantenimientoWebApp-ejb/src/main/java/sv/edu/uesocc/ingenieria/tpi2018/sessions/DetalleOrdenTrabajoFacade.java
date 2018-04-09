@@ -8,15 +8,14 @@ package sv.edu.uesocc.ingenieria.tpi2018.sessions;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import sv.edu.uesocc.ingenieria.tpi2018.entidades.DetalleOrdenTrabajo;
+import sv.edu.uesocc.ingenieria.mantenimientolib.DetalleOrdenTrabajo;
 
 /**
  *
- * @author ricky
+ * @author david
  */
 @Stateless
-public class DetalleOrdenTrabajoFacade extends AbstractFacade<DetalleOrdenTrabajo> implements DetalleOrdenTrabajoFacadeLocal {
-
+public class DetalleOrdenTrabajoFacade extends AbstractFacade<DetalleOrdenTrabajo> implements DetalleOrdenTrabajoFacadeLocal{
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -28,5 +27,4 @@ public class DetalleOrdenTrabajoFacade extends AbstractFacade<DetalleOrdenTrabaj
     public DetalleOrdenTrabajoFacade() {
         super(DetalleOrdenTrabajo.class);
     }
-    
 }

@@ -7,7 +7,7 @@ package sv.edu.uesocc.ingenieria.tpi2018.sessions;
 
 import java.util.List;
 import javax.ejb.Local;
-import sv.edu.uesocc.ingenieria.tpi2018.entidades.OrdenTrabajo;
+import sv.edu.uesocc.ingenieria.mantenimientolib.OrdenTrabajo;
 
 /**
  *

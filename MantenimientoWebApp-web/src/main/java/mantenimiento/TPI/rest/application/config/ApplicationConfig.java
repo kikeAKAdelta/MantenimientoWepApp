@@ -48,6 +48,7 @@ public class ApplicationConfig extends Application {
         resources.add(mantenimientoTPI.rest.SolicitudRest.class);
         resources.add(mantenimientoTPI.rest.SubtipoMttoRest.class);
         resources.add(mantenimientoTPI.rest.TipomttoRest.class);
+        resources.add(mantenimientoTPI.rest.UnidadRest.class);
     }
     
 }
