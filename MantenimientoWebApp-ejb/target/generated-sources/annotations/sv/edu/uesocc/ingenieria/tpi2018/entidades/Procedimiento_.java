@@ -8,7 +8,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.entidades.Diagnostico;
 import sv.edu.uesocc.ingenieria.tpi2018.entidades.Estado;
 import sv.edu.uesocc.ingenieria.tpi2018.entidades.Pasos;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-04-08T21:03:07")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-04-08T22:59:46")
 @StaticMetamodel(Procedimiento.class)
 public class Procedimiento_ { 
 

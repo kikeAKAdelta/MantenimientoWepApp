@@ -7,7 +7,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.entidades.Diagnostico;
 import sv.edu.uesocc.ingenieria.tpi2018.entidades.DiagnosticoPartePK;
 import sv.edu.uesocc.ingenieria.tpi2018.entidades.Parte;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-04-08T21:03:07")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-04-08T22:59:46")
 @StaticMetamodel(DiagnosticoParte.class)
 public class DiagnosticoParte_ { 
 
