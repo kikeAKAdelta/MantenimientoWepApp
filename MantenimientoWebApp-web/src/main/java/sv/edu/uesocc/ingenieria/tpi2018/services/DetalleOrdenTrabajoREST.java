@@ -20,7 +20,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import sv.edu.uesocc.ingenieria.tpi2018.entidades.DetalleOrdenTrabajo;
-import sv.edu.uesocc.ingenieria.tpi2018.sessions.DetalleOrdenTrabajoFacade;
+import sv.edu.uesocc.ingenieria.tpi2018.sessions.DetalleOrdenTrabajoFacadeLocal;
 
 
 /**
@@ -32,7 +32,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.DetalleOrdenTrabajoFacade;
 public class DetalleOrdenTrabajoREST implements Serializable{
     
     @EJB 
-    private DetalleOrdenTrabajoFacade ejbDetalleOrdenTrabajo;
+    private DetalleOrdenTrabajoFacadeLocal ejbDetalleOrdenTrabajo;
     
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-web_war_1.0-SNAPSHOTPU")
     private EntityManager em = null;

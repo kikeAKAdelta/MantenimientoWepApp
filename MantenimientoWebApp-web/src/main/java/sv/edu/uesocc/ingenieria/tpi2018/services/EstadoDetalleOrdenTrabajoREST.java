@@ -19,19 +19,19 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import sv.edu.uesocc.ingenieria.tpi2018.entidades.Diagnostico;
-import sv.edu.uesocc.ingenieria.tpi2018.sessions.DiagnosticoFacadeLocal;
+import sv.edu.uesocc.ingenieria.tpi2018.entidades.EstadoDetalleOrdenTrabajo;
+import sv.edu.uesocc.ingenieria.tpi2018.sessions.EstadoDetalleOrdenTrabajoFacadeLocal;
 
 /**
  *
  * @author ricky
  * Ricardo Barrientos
  */
-@Path("/diagnostico")
-public class DiagnosticoREST implements Serializable{
+@Path("/estadoDetalleOrdenTrabajo")
+public class EstadoDetalleOrdenTrabajoREST implements Serializable{
     
     @EJB 
-    private DiagnosticoFacadeLocal ejbDiagnostico;
+    private EstadoDetalleOrdenTrabajoFacadeLocal ejbEDOT;
     
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-web_war_1.0-SNAPSHOTPU")
     private EntityManager em = null;
@@ -39,16 +39,16 @@ public class DiagnosticoREST implements Serializable{
     
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Diagnostico> findAll(){
-        List listaDiagnostico = null;
+    public List<EstadoDetalleOrdenTrabajo> findAll(){
+        List listaEDOT = null;
         try {
-            if(ejbDiagnostico != null){
-                return ejbDiagnostico.findAll();
+            if(ejbEDOT != null){
+                return ejbEDOT.findAll();
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
-        return listaDiagnostico;
+        return listaEDOT;
     }
     
     @Path("/count")
@@ -57,8 +57,8 @@ public class DiagnosticoREST implements Serializable{
     public Integer count() {
 
         try {
-            if (ejbDiagnostico != null) {
-                return ejbDiagnostico.count();
+            if (ejbEDOT != null) {
+                return ejbEDOT.count();
             }
 
         } catch (Exception e) {
@@ -68,26 +68,26 @@ public class DiagnosticoREST implements Serializable{
     }
     
     @GET
-    @Path("/{idDiagnostico}")
+    @Path("/{idEDOT}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Diagnostico findById(@PathParam("idDiagnostico") Integer idDiagnostico){
+    public EstadoDetalleOrdenTrabajo findById(@PathParam("idEDOT") Integer idEDOT){
         try {
-            if(ejbDiagnostico != null){
-                ejbDiagnostico.find(idDiagnostico);
+            if(ejbEDOT != null){
+                ejbEDOT.find(idEDOT);
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
-        return new Diagnostico();       
+        return new EstadoDetalleOrdenTrabajo();       
     }
     
-    @Path("/{idDiagnostico}")
+    @Path("/{idEDOT}")
     @DELETE
-    public Response remove (@PathParam("idDiagnostico") Integer idDiagnostico){
+    public Response remove (@PathParam("idEDOT") Integer idEDOT){
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
         try {
-            if(idDiagnostico != null && this.ejbDiagnostico != null){
-                ejbDiagnostico.remove(ejbDiagnostico.find(idDiagnostico));
+            if(idEDOT != null && this.ejbEDOT != null){
+                ejbEDOT.remove(ejbEDOT.find(idEDOT));
                 respuesta = Response.status(Response.Status.OK).build();
             }
         } catch (Exception e) {
@@ -97,16 +97,16 @@ public class DiagnosticoREST implements Serializable{
     return respuesta;
     }
     
-    @Path("/{idDiagnostico}")
+    @Path("/{idEDOT}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(Diagnostico diagnostico){
+    public Response create(EstadoDetalleOrdenTrabajo edot){
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build(); 
         try {
-            if(ejbDiagnostico!=null){
-                ejbDiagnostico.create(diagnostico);
-                respuesta = Response.status(Response.Status.CREATED).entity(diagnostico).build();
+            if(ejbEDOT!=null){
+                ejbEDOT.create(edot);
+                respuesta = Response.status(Response.Status.CREATED).entity(edot).build();
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
@@ -116,13 +116,13 @@ public class DiagnosticoREST implements Serializable{
     }
     
     @PUT
-    @Path("/{idDiagnostico}")
+    @Path("/{idEDOT}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response edit(@PathParam("idDiagnostico") Integer idDiagnostico, Diagnostico diagnostico) {
+    public Response edit(@PathParam("idEDOT") Integer idEDOT, EstadoDetalleOrdenTrabajo edot) {
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
         try {
-            if (this.ejbDiagnostico != null) {
-                ejbDiagnostico.edit(diagnostico);
+            if (this.ejbEDOT != null) {
+                ejbEDOT.edit(edot);
                 respuesta = Response.status(Response.Status.OK).build();
             }
         } catch (Exception e) {

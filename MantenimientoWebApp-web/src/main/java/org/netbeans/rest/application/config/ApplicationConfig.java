@@ -33,6 +33,12 @@ public class ApplicationConfig extends Application {
         resources.add(sv.edu.uesocc.ingenieria.tpi2018.services.DetalleOrdenTrabajoREST.class);
         resources.add(sv.edu.uesocc.ingenieria.tpi2018.services.DiagnosticoParteREST.class);
         resources.add(sv.edu.uesocc.ingenieria.tpi2018.services.DiagnosticoREST.class);
+        resources.add(sv.edu.uesocc.ingenieria.tpi2018.services.EquipoREST.class);
+        resources.add(sv.edu.uesocc.ingenieria.tpi2018.services.EstadoDetalleOrdenTrabajoREST.class);
+        resources.add(sv.edu.uesocc.ingenieria.tpi2018.services.EstadoREST.class);
+        resources.add(sv.edu.uesocc.ingenieria.tpi2018.services.ExcepcionCalendarioREST.class);
+        resources.add(sv.edu.uesocc.ingenieria.tpi2018.services.MttoDetalleREST.class);
+        resources.add(sv.edu.uesocc.ingenieria.tpi2018.services.OrdenTrabajoREST.class);
     }
     
 }

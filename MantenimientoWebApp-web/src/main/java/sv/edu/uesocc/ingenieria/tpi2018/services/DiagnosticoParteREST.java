@@ -20,7 +20,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import sv.edu.uesocc.ingenieria.tpi2018.entidades.DiagnosticoParte;
-import sv.edu.uesocc.ingenieria.tpi2018.sessions.DiagnosticoParteFacade;
+import sv.edu.uesocc.ingenieria.tpi2018.sessions.DiagnosticoParteFacadeLocal;
 
 /**
  *
@@ -31,7 +31,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.DiagnosticoParteFacade;
 public class DiagnosticoParteREST implements Serializable{
     
     @EJB 
-    private DiagnosticoParteFacade ejbDiagnosticoParte;
+    private DiagnosticoParteFacadeLocal ejbDiagnosticoParte;
     
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-web_war_1.0-SNAPSHOTPU")
     private EntityManager em = null;
