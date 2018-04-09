@@ -18,7 +18,7 @@ import org.junit.Rule;
 import org.junit.runner.RunWith;
 import org.mockito.internal.util.reflection.Whitebox;
 import org.powermock.modules.junit4.PowerMockRunner;
-import sv.edu.uesocc.ingenieria.tpi2018.entidades.Unidad;
+import sv.edu.uesocc.ingenieria.mantenimientolib.Unidad;
 
 /**
  *

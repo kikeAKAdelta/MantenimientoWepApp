@@ -10,8 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import sv.edu.uesocc.ingenieria.tpi2018.entidades.Parte;
-import sv.edu.uesocc.ingenieria.tpi2018.entidades.Unidad;
+import sv.edu.uesocc.ingenieria.mantenimientolib.Unidad;
 
 /**
  *
