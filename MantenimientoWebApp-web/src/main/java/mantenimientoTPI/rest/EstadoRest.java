@@ -25,11 +25,13 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.EstadoFacadeLocal;
  *
  * @author degon
  */
+
 @Path("/estado")
 public class EstadoRest implements Serializable{
     
-     @EJB
+    @EJB
     private EstadoFacadeLocal ejbEstado;
+     
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -51,7 +53,7 @@ public class EstadoRest implements Serializable{
         return 0;
     }
     
-    @Path("/{id_estado}")
+    @Path("/buscarporid/{id_estado}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Estado findById(@PathParam("id_estado") Integer id_estado){
@@ -61,7 +63,7 @@ public class EstadoRest implements Serializable{
         return new Estado();
     }
     
-    @Path("/{id_estado}")
+    @Path("/borrar/{id_estado}")
     @DELETE
     public Response remove(@PathParam("id_estado") Integer id_estado){
         Estado a = new Estado(id_estado);
@@ -72,7 +74,7 @@ public class EstadoRest implements Serializable{
         }
         return respuesta;
     }
-    @Path("/{id_estado}")
+    @Path("/crear/{id_estado}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -81,7 +83,7 @@ public class EstadoRest implements Serializable{
         return Response.status(Response.Status.CREATED).entity(estado).build();
     }
     
-    @Path("/{id_estado}")
+    @Path("/modificar/{id_estado}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_estado") Integer id_estado, Estado estado) {

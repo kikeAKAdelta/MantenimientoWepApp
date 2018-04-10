@@ -7,6 +7,8 @@ package mantenimientoTPI.rest;
 
 import java.util.List;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -30,6 +32,9 @@ public class ExcepcionCalendarioRest {
     @EJB
     private ExcepcionCalendarioFacadeLocal ejbExcepcionCalendario;
     
+    @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-web_war_1.0-SNAPSHOTPU")
+    private EntityManager em = null;    
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<ExcepcionCalendario> findAll(){
@@ -50,7 +55,7 @@ public class ExcepcionCalendarioRest {
         return 0;
     }
     
-    @Path("/{id_calendarioExcepcion}")
+    @Path("/buscarporid/{id_calendarioExcepcion}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public ExcepcionCalendario findById(@PathParam("id_calendarioExcepcion") Integer id_calendarioEcepcion){
@@ -60,7 +65,7 @@ public class ExcepcionCalendarioRest {
         return new ExcepcionCalendario();
     }
     
-    @Path("/{id_calendarioExcepcion}")
+    @Path("/borrar/{id_calendarioExcepcion}")
     @DELETE
     public Response remove(@PathParam("id_calendario") Integer id_calendarioExcepcion){
         ExcepcionCalendario a = new ExcepcionCalendario(id_calendarioExcepcion);
@@ -71,7 +76,7 @@ public class ExcepcionCalendarioRest {
         }
         return respuesta;
     }
-    @Path("/{id_calendarioExcepcion}")
+    @Path("/crear/{id_calendarioExcepcion}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -80,7 +85,7 @@ public class ExcepcionCalendarioRest {
         return Response.status(Response.Status.CREATED).entity(calendario).build();
     }    
     
-    @Path("/{id_calendarioExcepcion}")
+    @Path("/modificar/{id_calendarioExcepcion}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_calendarioExcepcion") Integer id_calendarioExcepcion, ExcepcionCalendario calendario) {

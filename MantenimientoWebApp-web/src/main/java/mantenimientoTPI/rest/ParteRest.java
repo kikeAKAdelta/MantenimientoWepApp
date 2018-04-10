@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -8,6 +8,8 @@ package mantenimientoTPI.rest;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -27,8 +29,12 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.ParteFacadeLocal;
  */
 @Path("/parte")
 public class ParteRest implements Serializable{
+    
     @EJB
     private ParteFacadeLocal ejbParte;
+    
+    @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-web_war_1.0-SNAPSHOTPU")
+    private EntityManager em = null;    
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -50,7 +56,7 @@ public class ParteRest implements Serializable{
         return 0;
     }
     
-    @Path("/{id_parte}")
+    @Path("/buscarporid/{id_parte}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Parte findById(@PathParam("id_parte") Integer id_parte){
@@ -60,7 +66,7 @@ public class ParteRest implements Serializable{
         return new Parte();
     }
     
-    @Path("/{id_parte}")
+    @Path("/borrar/{id_parte}")
     @DELETE
     public Response remove(@PathParam("id_parte") Integer id_parte){
         Parte a = new Parte(id_parte);
@@ -71,7 +77,7 @@ public class ParteRest implements Serializable{
         }
         return respuesta;
     }
-    @Path("/{id_parte}")
+    @Path("/crear/{id_parte}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -80,7 +86,7 @@ public class ParteRest implements Serializable{
         return Response.status(Response.Status.CREATED).entity(parte).build();
     }
     
-    @Path("/{id_parte}")
+    @Path("/modificar/{id_parte}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_parte") Integer id_parte, Parte parte) {
