@@ -125,9 +125,17 @@ public class UnidadRestTest {
 
         Integer id_unidad=1;
         
-        Mockito.doNothing().when(mockUnidadRest).remove(id_unidad); //metodo void
+        Unidad unidad=new Unidad(id_unidad);
         
-        mockUnidadRest.remove(id_unidad);
+        Response expResult=Response.status(Response.Status.OK).build();
+        
+        assertNotNull(expResult);
+        
+        Mockito.when(mockUnidadRest.remove(id_unidad)).thenReturn(expResult);
+        
+        Response result=mockUnidadRest.remove(id_unidad);
+        
+        assertEquals(expResult, result);
         
     }
 
@@ -137,12 +145,19 @@ public class UnidadRestTest {
     @Test
     public void testCreate() {
         System.out.println("create");
-        Unidad unidad1=new Unidad(1);
+        Integer id_unidad=1;
         
-        Mockito.doNothing().when(mockUnidadRest).create(unidad1);
+        Unidad unidad=new Unidad(id_unidad);
         
-        mockUnidadRest.create(unidad1);
+        Response expResult=Response.status(Response.Status.OK).build();
         
+        assertNotNull(expResult);
+        
+        Mockito.when(mockUnidadRest.create(unidad)).thenReturn(expResult);
+        
+        Response result=mockUnidadRest.create(unidad);
+        
+        assertEquals(expResult, result);
     }
 
     /**
@@ -151,12 +166,22 @@ public class UnidadRestTest {
     @Test
     public void testEdit() {
         System.out.println("edit");
-        Unidad uni=new Unidad(1);
-        Integer id=new Integer(1);
+        Integer id_unidad=1;
         
-        Mockito.doNothing().when(mockUnidadRest).edit(id,uni);
+        Unidad unidad=new Unidad(id_unidad);
         
-        mockUnidadRest.edit(id,uni);
+        Response expResult=Response.status(Response.Status.OK).build();
+        
+        assertNotNull(expResult);
+        
+        Mockito.when(mockUnidadRest.edit(id_unidad,unidad)).thenReturn(expResult);
+        
+        Response result=mockUnidadRest.edit(id_unidad,unidad);
+        
+        assertEquals(expResult, result);
+        
+        
+        
         
     }
     

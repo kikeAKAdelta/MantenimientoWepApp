@@ -61,29 +61,38 @@ public class UnidadRest {
     
     @Path("/{id_unidad}")
     @DELETE
-    public void remove(@PathParam("id_unidad") Integer id_unidad){
+    public Response remove(@PathParam("id_unidad") Integer id_unidad){
         Unidad a = new Unidad(id_unidad);
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
         if (ejbUnidad != null) {
             ejbUnidad.remove(a);
+            respuesta=Response.status(Response.Status.OK).entity(a).build();
         }
-        
+        return respuesta;
     }
     @Path("/{id_unidad}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void create(Unidad unidad){       
-        ejbUnidad.create(unidad);
+    public Response create(Unidad unidad){       
+        Response respuesta = Response.status(Response.Status.NOT_IMPLEMENTED).build();
+        if (unidad != null) {
+            ejbUnidad.create(unidad);
+            respuesta=Response.status(Response.Status.CREATED).entity(unidad).build();
+        }
+        return respuesta;
     }
     
     @Path("/{id_unidad}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void edit(@PathParam("id_unidad") Integer id_unidad, Unidad unidad) {
+    public Response edit(@PathParam("id_unidad") Integer id_unidad, Unidad unidad) {
+        Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbUnidad != null) {
                 ejbUnidad.edit(unidad);
+                respuesta=Response.status(Response.Status.OK).entity(unidad).build();
             }
+            return respuesta;
     }
     
     
