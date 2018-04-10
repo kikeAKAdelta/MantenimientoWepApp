@@ -1,0 +1,6 @@
+#surefire
+#Tue Apr 10 14:33:13 CST 2018
+maven.ext.class.path=/home/ricky/netbeans-8.2/java/maven-nblib/netbeans-eventspy.jar
+user.dir=/home/ricky/NetBeansProjects/MantenimientoWepApp/MantenimientoLib
+localRepository=/home/ricky/.m2/repository
+basedir=/home/ricky/NetBeansProjects/MantenimientoWepApp/MantenimientoLib
