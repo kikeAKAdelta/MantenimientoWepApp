@@ -59,7 +59,7 @@ public class UnidadRest {
         return new Unidad();
     }
     
-    @Path("/{id_unidad}")
+    @Path("/borrar/{id_unidad}")
     @DELETE
     public Response remove(@PathParam("id_unidad") Integer id_unidad){
         Unidad a = new Unidad(id_unidad);
@@ -70,7 +70,7 @@ public class UnidadRest {
         }
         return respuesta;
     }
-    @Path("/{id_unidad}")
+    @Path("/crear/{id_unidad}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -79,7 +79,7 @@ public class UnidadRest {
         return Response.status(Response.Status.CREATED).entity(unidad).build();
     }
     
-    @Path("/{id_unidad}")
+    @Path("/modificar/{id_unidad}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_unidad") Integer id_unidad, Unidad unidad) {

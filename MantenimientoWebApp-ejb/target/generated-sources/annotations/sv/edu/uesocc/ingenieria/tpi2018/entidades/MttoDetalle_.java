@@ -9,7 +9,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.entidades.Estado;
 import sv.edu.uesocc.ingenieria.tpi2018.entidades.Parte;
 import sv.edu.uesocc.ingenieria.tpi2018.entidades.Responsable;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-04-10T12:33:37")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-04-10T16:20:24")
 @StaticMetamodel(MttoDetalle.class)
 public class MttoDetalle_ { 
 

@@ -8,7 +8,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.entidades.Estado;
 import sv.edu.uesocc.ingenieria.tpi2018.entidades.MttoDetalle;
 import sv.edu.uesocc.ingenieria.tpi2018.entidades.OrdenTrabajo;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-04-10T12:33:37")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-04-10T16:20:24")
 @StaticMetamodel(DetalleOrdenTrabajo.class)
 public class DetalleOrdenTrabajo_ { 
 
