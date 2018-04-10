@@ -2,26 +2,26 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU" transaction-type="JTA">
     <jta-data-source>java:app/jdni_Mantenimiento</jta-data-source>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.Calendario</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.DetalleOrdenTrabajo</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.Diagnostico</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.DiagnosticoParte</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.Equipo</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.Estado</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.EstadoDetalleOrdenTrabajo</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.ExcepcionCalendario</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.MttoDetalle</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.OrdenTrabajo</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.Parte</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.Pasos</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.PasosProcedimiento</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.Prioridad</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.Procedimiento</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.Responsable</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.Solicitud</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.SubtipoMtto</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.Tipomtto</class>
-    <class>sv.edu.uesocc.ingenieria.MantenimientoLib.Unidad</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Calendario</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.DetalleOrdenTrabajo</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Diagnostico</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.DiagnosticoParte</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Equipo</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Estado</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.EstadoDetalleOrdenTrabajo</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.ExcepcionCalendario</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.MttoDetalle</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.OrdenTrabajo</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Parte</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Pasos</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.PasosProcedimiento</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Prioridad</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Procedimiento</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Responsable</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Solicitud</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.SubtipoMtto</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Tipomtto</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Unidad</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties/>
   </persistence-unit>

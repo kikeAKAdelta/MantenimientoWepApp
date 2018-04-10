@@ -16,21 +16,21 @@ import org.junit.runners.model.Statement;
  *
  * @author enrique
  */
-public class EntityManagerProvider  implements TestRule{
+public class EntityManagerProvider implements TestRule{
         
         protected static EntityManagerFactory emf;
         protected static EntityManager em;
         protected static EntityTransaction tx;
 
         public EntityManagerProvider(){
-            emf=Persistence.createEntityManagerFactory("sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU");
+            emf=Persistence.createEntityManagerFactory("mantenimiento");
             em=emf.createEntityManager();
             tx=em.getTransaction();
         }
         
         @BeforeClass
         public static void init(){
-            emf=Persistence.createEntityManagerFactory("sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU");
+            emf=Persistence.createEntityManagerFactory("mantenimiento");
             em=emf.createEntityManager();
             tx=em.getTransaction();
         }
