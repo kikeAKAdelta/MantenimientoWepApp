@@ -31,6 +31,7 @@ public class DiagnosticoParteRest implements Serializable{
     @EJB
     private DiagnosticoParteFacadeLocal ejbDiagnosticoParte;
     
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<DiagnosticoParte> findAll(){
@@ -51,7 +52,7 @@ public class DiagnosticoParteRest implements Serializable{
         return 0;
     }
     
-    @Path("/{id_diagnosticoParte}")
+    @Path("/buscarporid/{id_diagnosticoParte}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public DiagnosticoParte findById(@PathParam("id_diagnosticoParte") Integer id_diagnosticoParte){
@@ -61,7 +62,7 @@ public class DiagnosticoParteRest implements Serializable{
         return new DiagnosticoParte();
     }
     
-    @Path("/{id_diagnosticoParte}")
+    @Path("/borrar/{id_diagnosticoParte}")
     @DELETE
     public Response remove(@PathParam("id_diagnostico") Integer id_diagnostico, 
             @PathParam("id_parte") Integer id_parte){
@@ -73,7 +74,7 @@ public class DiagnosticoParteRest implements Serializable{
         }
         return respuesta;
     }
-    @Path("/{id_diagnosticoParte}")
+    @Path("/crear/{id_diagnosticoParte}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -82,14 +83,14 @@ public class DiagnosticoParteRest implements Serializable{
         return Response.status(Response.Status.CREATED).entity(diagnostico).build();
     }
     
-    @Path("/{id_diagnosticoParte}")
+    @Path("/modificar/{id_diagnosticoParte}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_diagnosticoParte") Integer id_diagnosticoParte, DiagnosticoParte diagnostico) {
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbDiagnosticoParte != null) {
                 ejbDiagnosticoParte.edit(diagnostico);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(diagnostico).build();
             }
         return respuesta;
     }

@@ -8,6 +8,8 @@ package mantenimientoTPI.rest;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -28,8 +30,12 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.SolicitudFacadeLocal;
  */
 @Path("/solicitud")
 public class SolicitudRest implements Serializable{
+    
     @EJB
     private SolicitudFacadeLocal ejbSolicitud;
+    
+    @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-web_war_1.0-SNAPSHOTPU")
+    private EntityManager em = null;    
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -51,7 +57,7 @@ public class SolicitudRest implements Serializable{
         return 0;
     }
     
-    @Path("/{id_solicitud}")
+    @Path("/buscarporid/{id_solicitud}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Solicitud findById(@PathParam("id_solicitud") Integer id_solicitud){
@@ -61,7 +67,7 @@ public class SolicitudRest implements Serializable{
         return new Solicitud();
     }
     
-    @Path("/{id_solicitud}")
+    @Path("/borrar/{id_solicitud}")
     @DELETE
     public Response remove(@PathParam("id_solicitud") Integer id_solicitud){
         Solicitud a = new Solicitud(id_solicitud);
@@ -72,7 +78,7 @@ public class SolicitudRest implements Serializable{
         }
         return respuesta;
     }
-    @Path("/{id_solicitud}")
+    @Path("/crear/{id_solicitud}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -81,14 +87,14 @@ public class SolicitudRest implements Serializable{
         return Response.status(Response.Status.CREATED).entity(solicitud).build();
     }
     
-    @Path("/{id_solicitud}")
+    @Path("/modificar/{id_solicitud}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_solicitud") Integer id_solicitud, Solicitud solicitud) {
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbSolicitud != null) {
                 ejbSolicitud.edit(solicitud);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(solicitud).build();
             }
         return respuesta;
     }

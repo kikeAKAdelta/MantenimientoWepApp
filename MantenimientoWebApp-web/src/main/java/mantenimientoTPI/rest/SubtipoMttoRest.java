@@ -8,6 +8,8 @@ package mantenimientoTPI.rest;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -27,8 +29,12 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.SubtipoMttoFacadeLocal;
  */
 @Path("/subTipoMantenimiento")
 public class SubtipoMttoRest implements Serializable{
+    
     @EJB
     private SubtipoMttoFacadeLocal ejbSubtipoMtto;
+    
+    @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-web_war_1.0-SNAPSHOTPU")
+    private EntityManager em = null;    
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -60,7 +66,7 @@ public class SubtipoMttoRest implements Serializable{
         return new SubtipoMtto();
     }
     
-    @Path("/{id_subtipoMtto}")
+    @Path("/borrar/{id_subtipoMtto}")
     @DELETE
     public Response remove(@PathParam("id_subTipoMtto") Integer id_subTipoMtto, 
             @PathParam("id_tipoMtto") Integer id_tipoMtto){
@@ -72,7 +78,7 @@ public class SubtipoMttoRest implements Serializable{
         }
         return respuesta;
     }
-    @Path("/{id_subtipoMtto}")
+    @Path("/crear/{id_subtipoMtto}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -81,14 +87,14 @@ public class SubtipoMttoRest implements Serializable{
         return Response.status(Response.Status.CREATED).entity(SubtipoMtto).build();
     }
     
-    @Path("/{id_subtipoMtto}")
+    @Path("/modificar/{id_subtipoMtto}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_subtipoMtto") Integer id_subtipoMtto, SubtipoMtto subtipoMtto) {
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbSubtipoMtto != null) {
                 ejbSubtipoMtto.edit(subtipoMtto);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(subtipoMtto).build();
             }
         return respuesta;
     }

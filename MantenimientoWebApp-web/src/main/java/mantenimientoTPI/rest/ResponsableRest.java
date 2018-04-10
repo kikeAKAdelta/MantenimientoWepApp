@@ -8,6 +8,8 @@ package mantenimientoTPI.rest;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -27,8 +29,12 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.ResponsableFacadeLocal;
  */
 @Path("/responsable")
 public class ResponsableRest implements Serializable{
+    
     @EJB
     private ResponsableFacadeLocal ejbResponsable;
+    
+    @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-web_war_1.0-SNAPSHOTPU")
+    private EntityManager em = null;    
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -50,7 +56,7 @@ public class ResponsableRest implements Serializable{
         return 0;
     }
     
-    @Path("/{id_responsable}")
+    @Path("/buscarporid/{id_responsable}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Responsable findById(@PathParam("id_responsable") Integer id_responsable){
@@ -60,7 +66,7 @@ public class ResponsableRest implements Serializable{
         return new Responsable();
     }
     
-    @Path("/{id_responsable}")
+    @Path("/borrar/{id_responsable}")
     @DELETE
     public Response remove(@PathParam("id_responsable") Integer id_responsable){
         Responsable a = new Responsable(id_responsable);
@@ -71,7 +77,7 @@ public class ResponsableRest implements Serializable{
         }
         return respuesta;
     }
-    @Path("/{id_responsable}")
+    @Path("/crear/{id_responsable}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -80,14 +86,14 @@ public class ResponsableRest implements Serializable{
         return Response.status(Response.Status.CREATED).entity(responsable).build();
     }
     
-    @Path("/{id_responsable}")
+    @Path("/modificar/{id_responsable}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_responsable") Integer id_responsable, Responsable responsable) {
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbResponsable != null) {
                 ejbResponsable.edit(responsable);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(responsable).build();
             }
         return respuesta;
     }

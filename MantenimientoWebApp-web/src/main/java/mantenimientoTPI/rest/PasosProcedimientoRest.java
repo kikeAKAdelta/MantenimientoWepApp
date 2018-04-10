@@ -5,9 +5,12 @@
  */
 package mantenimientoTPI.rest;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -26,9 +29,13 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.PasosProcedimientoFacadeLocal;
  * @author degon
  */
 @Path("/pasosProcedimiento")
-public class PasosProcedimientoRest {
+public class PasosProcedimientoRest implements Serializable
+{
     @EJB
     private PasosProcedimientoFacadeLocal ebjPasosProcedimiento;
+    
+    @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-web_war_1.0-SNAPSHOTPU")
+    private EntityManager em = null;    
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -50,7 +57,7 @@ public class PasosProcedimientoRest {
         return 0;
     }
     
-    @Path("/{id_pasosProcedimiento}")
+    @Path("/buscarporid/{id_pasosProcedimiento}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public PasosProcedimiento findById(@PathParam("id_pasosProcedimiento") Integer id_pasosProcedimiento){
@@ -60,7 +67,7 @@ public class PasosProcedimientoRest {
         return new PasosProcedimiento();
     }
     
-    @Path("/{id_pasosProcedimiento}")
+    @Path("/borrar/{id_pasosProcedimiento}")
     @DELETE
     public Response remove(@PathParam("id_pasosProcedimiento") Integer id_pasosProcedimiento){
         PasosProcedimiento a = new PasosProcedimiento(id_pasosProcedimiento);
@@ -71,7 +78,7 @@ public class PasosProcedimientoRest {
         }
         return respuesta;
     }
-    @Path("/{id_pasosProcedimiento}")
+    @Path("/crear/{id_pasosProcedimiento}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -80,14 +87,14 @@ public class PasosProcedimientoRest {
         return Response.status(Response.Status.CREATED).entity(pasosProcedimiento).build();
     }
     
-    @Path("/{id_pasosProcedimiento}")
+    @Path("/modificar/{id_pasosProcedimiento}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_pasosProcedimiento") Integer id_pasosProcedimiento, PasosProcedimiento pasosProcedimiento) {
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ebjPasosProcedimiento != null) {
                 ebjPasosProcedimiento.edit(pasosProcedimiento);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(pasosProcedimiento).build();
             }
         return respuesta;
     }

@@ -5,6 +5,7 @@
  */
 package mantenimientoTPI.rest;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -25,11 +26,11 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.DiagnosticoFacadeLocal;
  * @author degon
  */
 @Path("/diagnostico")
-public class DiagnosticoRest {
+public class DiagnosticoRest implements Serializable{
     
     @EJB
     private DiagnosticoFacadeLocal ejbDiagnostico;
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Diagnostico> findAll(){
@@ -50,7 +51,7 @@ public class DiagnosticoRest {
         return 0;
     }
     
-    @Path("/{id_diagnostico}")
+    @Path("/buscarporid/{id_diagnostico}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Diagnostico findById(@PathParam("id_diagnostico") Integer id_diagnostico){
@@ -60,7 +61,7 @@ public class DiagnosticoRest {
         return new Diagnostico();
     }
     
-    @Path("/{id_diagnostico}")
+    @Path("/borrar/{id_diagnostico}")
     @DELETE
     public Response remove(@PathParam("id_diagnostico") Integer id_diagnostico){
         Diagnostico a = new Diagnostico(id_diagnostico);
@@ -71,7 +72,7 @@ public class DiagnosticoRest {
         }
         return respuesta;
     }
-    @Path("/{id_diagnostico}")
+    @Path("/crear/{id_diagnostico}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -79,14 +80,14 @@ public class DiagnosticoRest {
         ejbDiagnostico.create(diagnostico);
         return Response.status(Response.Status.CREATED).entity(diagnostico).build();
     }
-    @Path("/{id_diagnostico}")
+    @Path("/modificar/{id_diagnostico}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_diagnostico") Integer id_diagnostico, Diagnostico diagnostico) {
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbDiagnostico != null) {
                 ejbDiagnostico.edit(diagnostico);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(diagnostico).build();
             }
         return respuesta;
     }

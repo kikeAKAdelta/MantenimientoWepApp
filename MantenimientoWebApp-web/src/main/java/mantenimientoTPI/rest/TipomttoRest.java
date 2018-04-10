@@ -8,6 +8,8 @@ package mantenimientoTPI.rest;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -28,8 +30,12 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.TipomttoFacadeLocal;
 @Path("/tipoMantenimiento")
 public class TipomttoRest implements Serializable{
 
-     @EJB
+    //@EJB
+    @EJB(name="ejb/stateless")
     private TipomttoFacadeLocal ejbTipoMtto;
+    
+    @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-web_war_1.0-SNAPSHOTPU")
+    private EntityManager em = null;    
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -51,7 +57,7 @@ public class TipomttoRest implements Serializable{
         return 0;
     }
     
-    @Path("/{id_tipoMtto}")
+    @Path("/buscarporid/{id_tipoMtto}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Tipomtto findById(@PathParam("id_tipoMtto") Integer id_tipoMtto){
@@ -61,7 +67,7 @@ public class TipomttoRest implements Serializable{
         return new Tipomtto();
     }
     
-    @Path("/{id_tipoMtto}")
+    @Path("/borrar/{id_tipoMtto}")
     @DELETE
     public Response remove(@PathParam("id_tipoMtto") Integer id_tipoMtto){
         Tipomtto a = new Tipomtto(id_tipoMtto);
@@ -72,7 +78,7 @@ public class TipomttoRest implements Serializable{
         }
         return respuesta;
     }
-    @Path("/{id_tipoMtto}")
+    @Path("/crear/{id_tipoMtto}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -81,14 +87,14 @@ public class TipomttoRest implements Serializable{
         return Response.status(Response.Status.CREATED).entity(tipoMtto).build();
     }
     
-    @Path("/{id_tipoMtto}")
+    @Path("/modificar/{id_tipoMtto}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_tipoMtto") Integer id_tipoMtto, Tipomtto tipomtto) {
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbTipoMtto != null) {
                 ejbTipoMtto.edit(tipomtto);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(tipomtto).build();
             }
         return respuesta;
     }

@@ -8,6 +8,8 @@ package mantenimientoTPI.rest;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -29,8 +31,12 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.MttoDetalleFacadeLocal;
 @Path("/mantenimientoDetalle")
 public class MttoDetalleRest implements Serializable{
     
-     @EJB
+    //@EJB
+    @EJB(name = "MttoDetalleFacadeLocal")
     private MttoDetalleFacadeLocal ejbMantenimiento;
+    
+    @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-web_war_1.0-SNAPSHOTPU")
+    private EntityManager em = null;    
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -52,7 +58,7 @@ public class MttoDetalleRest implements Serializable{
         return 0;
     }
     
-    @Path("/{id_mantenimiento}")
+    @Path("/buscarporid/{id_mantenimiento}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public MttoDetalle findById(@PathParam("id_mantenimiento") Integer id_calendario){
@@ -62,7 +68,7 @@ public class MttoDetalleRest implements Serializable{
         return new MttoDetalle();
     }
     
-    @Path("/{id_mantenimiento}")
+    @Path("/borrar/{id_mantenimiento}")
     @DELETE
     public Response remove(@PathParam("id_mantenimiento") Integer id_mantenimiento){
         MttoDetalle a = new MttoDetalle(id_mantenimiento);
@@ -73,7 +79,7 @@ public class MttoDetalleRest implements Serializable{
         }
         return respuesta;
     }
-    @Path("/{id_mantenimiento}")
+    @Path("/crear/{id_mantenimiento}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -82,14 +88,14 @@ public class MttoDetalleRest implements Serializable{
         return Response.status(Response.Status.CREATED).entity(mantenimiento).build();
     }
     
-    @Path("/{id_mantenimiento}")
+    @Path("/modificar/{id_mantenimiento}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_mantenimiento") Integer id_mantenimiento, MttoDetalle mantenimiento) {
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbMantenimiento != null) {
                 ejbMantenimiento.edit(mantenimiento);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(mantenimiento).build();
             }
         return respuesta;
     }
