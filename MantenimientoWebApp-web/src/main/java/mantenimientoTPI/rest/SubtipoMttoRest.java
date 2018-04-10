@@ -6,13 +6,13 @@
 package mantenimientoTPI.rest;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -60,7 +60,7 @@ public class SubtipoMttoRest implements Serializable{
         return new SubtipoMtto();
     }
     
-    @Path("/{id_SubtipoMtto}")
+    @Path("/{id_subtipoMtto}")
     @DELETE
     public Response remove(@PathParam("id_subTipoMtto") Integer id_subTipoMtto, 
             @PathParam("id_tipoMtto") Integer id_tipoMtto){
@@ -80,4 +80,17 @@ public class SubtipoMttoRest implements Serializable{
         ejbSubtipoMtto.create(SubtipoMtto);
         return Response.status(Response.Status.CREATED).entity(SubtipoMtto).build();
     }
+    
+    @Path("/{id_subtipoMtto}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response edit(@PathParam("id_subtipoMtto") Integer id_subtipoMtto, SubtipoMtto subtipoMtto) {
+        Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
+            if (this.ejbSubtipoMtto != null) {
+                ejbSubtipoMtto.edit(subtipoMtto);
+                respuesta = Response.status(Response.Status.OK).build();
+            }
+        return respuesta;
+    }
+    
 }

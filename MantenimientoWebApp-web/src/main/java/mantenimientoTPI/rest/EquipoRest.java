@@ -12,6 +12,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -50,7 +51,7 @@ public class EquipoRest implements Serializable{
         return 0;
     }
     
-    @Path("/{id_calendario}")
+    @Path("/{id_equipo}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Equipo findById(@PathParam("id_equipo") Integer id_equipo){
@@ -71,7 +72,7 @@ public class EquipoRest implements Serializable{
         }
         return respuesta;
     }
-    @Path("/{id_calendario}")
+    @Path("/{id_equipo}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -79,4 +80,17 @@ public class EquipoRest implements Serializable{
         ejbEquipo.create(equipo);
         return Response.status(Response.Status.CREATED).entity(equipo).build();
     }
+    @Path("/{id_equipo}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response edit(@PathParam("id_equipo") Integer id_equipo, Equipo equipo) {
+        Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
+            if (this.ejbEquipo != null) {
+                ejbEquipo.edit(equipo);
+                respuesta = Response.status(Response.Status.OK).build();
+            }
+        return respuesta;
+    }
+    
+    
 }

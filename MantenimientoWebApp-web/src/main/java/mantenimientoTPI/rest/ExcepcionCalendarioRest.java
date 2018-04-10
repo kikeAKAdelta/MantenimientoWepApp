@@ -11,6 +11,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -78,4 +79,17 @@ public class ExcepcionCalendarioRest {
         ejbExcepcionCalendario.create(calendario);
         return Response.status(Response.Status.CREATED).entity(calendario).build();
     }    
+    
+    @Path("/{id_calendarioExcepcion}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response edit(@PathParam("id_calendarioExcepcion") Integer id_calendarioExcepcion, ExcepcionCalendario calendario) {
+        Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
+            if (this.ejbExcepcionCalendario != null) {
+                ejbExcepcionCalendario.edit(calendario);
+                respuesta = Response.status(Response.Status.OK).build();
+            }
+        return respuesta;
+    }
+    
 }

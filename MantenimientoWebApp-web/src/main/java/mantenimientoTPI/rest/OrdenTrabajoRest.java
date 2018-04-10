@@ -12,6 +12,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -50,19 +51,19 @@ public class OrdenTrabajoRest implements Serializable{
         return 0;
     }
     
-    @Path("/{id_orden}")
+    @Path("/{id_ordenTrabajo}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public OrdenTrabajo findById(@PathParam("id_orden") Integer id_orden){
+    public OrdenTrabajo findById(@PathParam("id_ordenTrabajo") Integer id_ordenTrabajo){
         if (ejbOrdenTrabajo != null) {
-            return ejbOrdenTrabajo.find(id_orden);
+            return ejbOrdenTrabajo.find(id_ordenTrabajo);
         }
         return new OrdenTrabajo();
     }
     
-    @Path("/{id_orden}")
+    @Path("/{id_ordenTrabajo}")
     @DELETE
-    public Response remove(@PathParam("id_orden") Integer id_OrdenTrabajo){
+    public Response remove(@PathParam("id_ordenTrabajo") Integer id_OrdenTrabajo){
         OrdenTrabajo a = new OrdenTrabajo(id_OrdenTrabajo);
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
         if (ejbOrdenTrabajo != null) {
@@ -79,4 +80,17 @@ public class OrdenTrabajoRest implements Serializable{
         ejbOrdenTrabajo.create(orden);
         return Response.status(Response.Status.CREATED).entity(orden).build();
     }
+    
+    @Path("/{id_ordenTrabajo}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response edit(@PathParam("id_ordenTrabajo") Integer id_ordenTrabajo, OrdenTrabajo ordenTrabajo) {
+        Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
+            if (this.ejbOrdenTrabajo != null) {
+                ejbOrdenTrabajo.edit(ordenTrabajo);
+                respuesta = Response.status(Response.Status.OK).build();
+            }
+        return respuesta;
+    }
+    
 }

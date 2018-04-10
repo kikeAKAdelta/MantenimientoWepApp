@@ -12,6 +12,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -60,7 +61,7 @@ public class EstadoDetalleOrdeTrabajoRest implements Serializable{
         return new EstadoDetalleOrdenTrabajo();
     }
     
-    @Path("/{id_calendario}")
+    @Path("/{id_estadoDetalleOrdenTrabajo}")
     @DELETE
     public Response remove(@PathParam("id_estadoDetalleOrdenTrabajo") Integer id_estadoDetalleOrdenTrabajo){
         EstadoDetalleOrdenTrabajo a = new EstadoDetalleOrdenTrabajo(id_estadoDetalleOrdenTrabajo);
@@ -79,4 +80,17 @@ public class EstadoDetalleOrdeTrabajoRest implements Serializable{
         ejbEstadoDetalleOrdenTrabajo.create(estadoDetalleOrdenTrabajo);
         return Response.status(Response.Status.CREATED).entity(estadoDetalleOrdenTrabajo).build();
     }
+    
+    @Path("/{id_estadoDetalleOrdenTrabajo}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response edit(@PathParam("id_estadoDetalleOrdenTrabajo") Integer id_estadoDetalleOrdenTrabajo, EstadoDetalleOrdenTrabajo estadoDetalleOrdenTrabajo) {
+        Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
+            if (this.ejbEstadoDetalleOrdenTrabajo != null) {
+                ejbEstadoDetalleOrdenTrabajo.edit(estadoDetalleOrdenTrabajo);
+                respuesta = Response.status(Response.Status.OK).build();
+            }
+        return respuesta;
+    }
+    
 }

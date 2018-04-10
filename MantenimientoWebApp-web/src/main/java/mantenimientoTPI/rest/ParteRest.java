@@ -12,6 +12,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -78,4 +79,17 @@ public class ParteRest implements Serializable{
         ejbParte.create(parte);
         return Response.status(Response.Status.CREATED).entity(parte).build();
     }
+    
+    @Path("/{id_parte}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response edit(@PathParam("id_parte") Integer id_parte, Parte parte) {
+        Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
+            if (this.ejbParte != null) {
+                ejbParte.edit(parte);
+                respuesta = Response.status(Response.Status.OK).build();
+            }
+        return respuesta;
+    }
+    
 }

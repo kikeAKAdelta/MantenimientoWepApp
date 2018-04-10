@@ -12,6 +12,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -62,7 +63,7 @@ public class SolicitudRest implements Serializable{
     
     @Path("/{id_solicitud}")
     @DELETE
-    public Response remove(@PathParam("id_calendario") Integer id_solicitud){
+    public Response remove(@PathParam("id_solicitud") Integer id_solicitud){
         Solicitud a = new Solicitud(id_solicitud);
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
         if (ejbSolicitud != null) {
@@ -79,4 +80,17 @@ public class SolicitudRest implements Serializable{
         ejbSolicitud.create(solicitud);
         return Response.status(Response.Status.CREATED).entity(solicitud).build();
     }
+    
+    @Path("/{id_solicitud}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response edit(@PathParam("id_solicitud") Integer id_solicitud, Solicitud solicitud) {
+        Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
+            if (this.ejbSolicitud != null) {
+                ejbSolicitud.edit(solicitud);
+                respuesta = Response.status(Response.Status.OK).build();
+            }
+        return respuesta;
+    }
+    
 }

@@ -13,6 +13,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -62,7 +63,7 @@ public class ProcedimientoRest implements Serializable{
     
     @Path("/{id_procedimiento}")
     @DELETE
-    public Response remove(@PathParam("id_calendario") Integer id_procedimiento){
+    public Response remove(@PathParam("id_procedimiento") Integer id_procedimiento){
         Procedimiento a = new Procedimiento(id_procedimiento);
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
         if (ejbProcedimiento != null) {
@@ -79,4 +80,17 @@ public class ProcedimientoRest implements Serializable{
         ejbProcedimiento.create(procedimiento);
         return Response.status(Response.Status.CREATED).entity(procedimiento).build();
     }
+    
+    @Path("/{id_procedimiento}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response edit(@PathParam("id_procedimiento") Integer id_procedimiento, Procedimiento procedimiento) {
+        Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
+            if (this.ejbProcedimiento != null) {
+                ejbProcedimiento.edit(procedimiento);
+                respuesta = Response.status(Response.Status.OK).build();
+            }
+        return respuesta;
+    }
+    
 }

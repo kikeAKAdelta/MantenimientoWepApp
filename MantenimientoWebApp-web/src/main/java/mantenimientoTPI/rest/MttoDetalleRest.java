@@ -12,6 +12,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -79,5 +80,17 @@ public class MttoDetalleRest implements Serializable{
     public Response create(MttoDetalle mantenimiento){       
         ejbMantenimiento.create(mantenimiento);
         return Response.status(Response.Status.CREATED).entity(mantenimiento).build();
+    }
+    
+    @Path("/{id_mantenimiento}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response edit(@PathParam("id_mantenimiento") Integer id_mantenimiento, MttoDetalle mantenimiento) {
+        Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
+            if (this.ejbMantenimiento != null) {
+                ejbMantenimiento.edit(mantenimiento);
+                respuesta = Response.status(Response.Status.OK).build();
+            }
+        return respuesta;
     }
 }

@@ -12,6 +12,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -77,5 +78,17 @@ public class PasosRest {
     public Response create(Pasos pasos){       
         ejbPasos.create(pasos);
         return Response.status(Response.Status.CREATED).entity(pasos).build();
+    }
+    
+    @Path("/{id_pasos}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response edit(@PathParam("id_pasos") Integer id_pasos, Pasos pasos) {
+        Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
+            if (this.ejbPasos != null) {
+                ejbPasos.edit(pasos);
+                respuesta = Response.status(Response.Status.OK).build();
+            }
+        return respuesta;
     }
 }

@@ -12,6 +12,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -61,7 +62,7 @@ public class PrioridadRest implements Serializable{
     
     @Path("/{id_prioridad}")
     @DELETE
-    public Response remove(@PathParam("id_calendario") Integer id_prioridad){
+    public Response remove(@PathParam("id_prioridad") Integer id_prioridad){
         Prioridad a = new Prioridad(id_prioridad);
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
         if (ejbPrioridad != null) {
@@ -78,4 +79,17 @@ public class PrioridadRest implements Serializable{
         ejbPrioridad.create(prioridad);
         return Response.status(Response.Status.CREATED).entity(prioridad).build();
     }
+    
+    @Path("/{id_prioridad}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response edit(@PathParam("id_prioridad") Integer id_prioridad, Prioridad prioridad) {
+        Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
+            if (this.ejbPrioridad != null) {
+                ejbPrioridad.edit(prioridad);
+                respuesta = Response.status(Response.Status.OK).build();
+            }
+        return respuesta;
+    }
+    
 }
