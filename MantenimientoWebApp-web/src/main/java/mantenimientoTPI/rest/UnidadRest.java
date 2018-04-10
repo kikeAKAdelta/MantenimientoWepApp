@@ -18,6 +18,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import sv.edu.uesocc.ingenieria.mantenimientolib.Unidad;
 import sv.edu.uesocc.ingenieria.tpi2018.sessions.UnidadFacadeLocal;
 
@@ -25,6 +30,9 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.UnidadFacadeLocal;
  *
  * @author david
  */
+
+@RestController
+@RequestMapping("/unidad")
 public class UnidadRest {
     @EJB
     private UnidadFacadeLocal ejbUnidad;
@@ -90,6 +98,28 @@ public class UnidadRest {
             }
         return respuesta;
     }
+    private UnidadService unidadservice;
+
+    public UnidadRest (UnidadService unidadservice) {
+        this.unidadservice = unidadservice;
+    }
+    
+    @GetMapping
+    public String nuevaUnidad() {
+        return unidadservice.nueva();
+    }
+    
+     @GetMapping(value = "/json", produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+    public Unidad json() {
+        return new Unidad(001);
+    }
+
+    @PostMapping(value = "/post", consumes = org.springframework.http.MediaType.APPLICATION_JSON_VALUE,
+            produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+    public Unidad post(@RequestBody Unidad unidad) {
+        return unidad;
+    }
+    
     
     
 }

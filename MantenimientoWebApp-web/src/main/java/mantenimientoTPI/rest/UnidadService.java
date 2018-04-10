@@ -12,10 +12,9 @@ import org.springframework.stereotype.Component;
  * @author LENOVO
  */
 @Component
-public class HelloService {
-
-    public String hello() {
-        return "hello world";
-    }
+public class UnidadService {
     
+    public String nueva() {
+        return "Monitor";
+    }
 }
