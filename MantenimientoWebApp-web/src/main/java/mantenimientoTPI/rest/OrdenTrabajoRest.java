@@ -8,6 +8,8 @@ package mantenimientoTPI.rest;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -28,8 +30,12 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.OrdenTrabajoFacadeLocal;
  */
 @Path("ordenTrabajo")
 public class OrdenTrabajoRest implements Serializable{
+    
     @EJB
     private OrdenTrabajoFacadeLocal ejbOrdenTrabajo;
+    
+    @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-web_war_1.0-SNAPSHOTPU")
+    private EntityManager em = null;    
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -51,7 +57,7 @@ public class OrdenTrabajoRest implements Serializable{
         return 0;
     }
     
-    @Path("/{id_ordenTrabajo}")
+    @Path("/buscarporid/{id_ordenTrabajo}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public OrdenTrabajo findById(@PathParam("id_ordenTrabajo") Integer id_ordenTrabajo){
@@ -61,7 +67,7 @@ public class OrdenTrabajoRest implements Serializable{
         return new OrdenTrabajo();
     }
     
-    @Path("/{id_ordenTrabajo}")
+    @Path("/borrar/{id_ordenTrabajo}")
     @DELETE
     public Response remove(@PathParam("id_ordenTrabajo") Integer id_OrdenTrabajo){
         OrdenTrabajo a = new OrdenTrabajo(id_OrdenTrabajo);
@@ -72,7 +78,7 @@ public class OrdenTrabajoRest implements Serializable{
         }
         return respuesta;
     }
-    @Path("/{id_ordenTrabajo}")
+    @Path("/crear/{id_ordenTrabajo}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -81,7 +87,7 @@ public class OrdenTrabajoRest implements Serializable{
         return Response.status(Response.Status.CREATED).entity(orden).build();
     }
     
-    @Path("/{id_ordenTrabajo}")
+    @Path("/modificar/{id_ordenTrabajo}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_ordenTrabajo") Integer id_ordenTrabajo, OrdenTrabajo ordenTrabajo) {

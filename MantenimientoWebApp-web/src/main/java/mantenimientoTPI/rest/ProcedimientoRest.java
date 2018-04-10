@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -28,8 +30,12 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.ProcedimientoFacadeLocal;
  */
 @Path("/procedimiento")
 public class ProcedimientoRest implements Serializable{
+    
     @EJB
     private ProcedimientoFacadeLocal ejbProcedimiento;
+    
+    @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-web_war_1.0-SNAPSHOTPU")
+    private EntityManager em = null;    
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -51,7 +57,7 @@ public class ProcedimientoRest implements Serializable{
         return 0;
     }
     
-    @Path("/{id_procedimiento}")
+    @Path("/buscarporid/{id_procedimiento}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Procedimiento findById(@PathParam("id_procedimiento") Integer id_procedimiento){
@@ -61,7 +67,7 @@ public class ProcedimientoRest implements Serializable{
         return new Procedimiento();
     }
     
-    @Path("/{id_procedimiento}")
+    @Path("/borrar/{id_procedimiento}")
     @DELETE
     public Response remove(@PathParam("id_procedimiento") Integer id_procedimiento){
         Procedimiento a = new Procedimiento(id_procedimiento);
@@ -72,7 +78,7 @@ public class ProcedimientoRest implements Serializable{
         }
         return respuesta;
     }
-    @Path("/{id_procedimiento}")
+    @Path("/crear/{id_procedimiento}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -81,7 +87,7 @@ public class ProcedimientoRest implements Serializable{
         return Response.status(Response.Status.CREATED).entity(procedimiento).build();
     }
     
-    @Path("/{id_procedimiento}")
+    @Path("/modificar/{id_procedimiento}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_procedimiento") Integer id_procedimiento, Procedimiento procedimiento) {

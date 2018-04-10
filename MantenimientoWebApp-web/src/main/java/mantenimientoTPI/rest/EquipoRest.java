@@ -8,6 +8,9 @@ package mantenimientoTPI.rest;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -30,6 +33,7 @@ public class EquipoRest implements Serializable{
     
     @EJB
     private EquipoFacadeLocal ejbEquipo;
+
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -51,7 +55,7 @@ public class EquipoRest implements Serializable{
         return 0;
     }
     
-    @Path("/{id_equipo}")
+    @Path("/buscarporid/{id_equipo}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Equipo findById(@PathParam("id_equipo") Integer id_equipo){
@@ -61,7 +65,7 @@ public class EquipoRest implements Serializable{
         return new Equipo();
     }
     
-    @Path("/{id_equipo}")
+    @Path("/borrar/{id_equipo}")
     @DELETE
     public Response remove(@PathParam("id_equipo") Integer id_equipo){
         Equipo a = new Equipo(id_equipo);
@@ -72,7 +76,7 @@ public class EquipoRest implements Serializable{
         }
         return respuesta;
     }
-    @Path("/{id_equipo}")
+    @Path("/crear/{id_equipo}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -80,7 +84,7 @@ public class EquipoRest implements Serializable{
         ejbEquipo.create(equipo);
         return Response.status(Response.Status.CREATED).entity(equipo).build();
     }
-    @Path("/{id_equipo}")
+    @Path("/modificar/{id_equipo}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_equipo") Integer id_equipo, Equipo equipo) {

@@ -27,8 +27,10 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.DetalleOrdenTrabajoFacadeLocal;
  */
 @Path("/detalleOrdenTrabajo")
 public class DetalleOrdenTrabajoRest implements Serializable{
+    
     @EJB
     private DetalleOrdenTrabajoFacadeLocal ejbDetalleOrden;
+    
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -50,17 +52,17 @@ public class DetalleOrdenTrabajoRest implements Serializable{
         return 0;
     }
     
-    @Path("/{id_detalle_orden_trabajo}")
+    @Path("/buscarporid/{id_detalle_orden_trabajo}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public DetalleOrdenTrabajo findById(@PathParam("id_detalle_orden_trabajo") Integer id_calendario){
+    public DetalleOrdenTrabajo findById(@PathParam("id_detalle_orden_trabajo") Integer id_detalle_orden_trabajo){
         if (ejbDetalleOrden != null) {
-            return ejbDetalleOrden.find(id_calendario);
+            return ejbDetalleOrden.find(id_detalle_orden_trabajo);
         }
         return new DetalleOrdenTrabajo();
     }
     
-    @Path("/{id_detalle_orden_trabajo}")
+    @Path("/borrar/{id_detalle_orden_trabajo}")
     @DELETE
     public Response remove(@PathParam("id_detalle_orden_trabajo") Integer id_detalle_orden_trabajo){
         DetalleOrdenTrabajo a = new DetalleOrdenTrabajo(id_detalle_orden_trabajo);
@@ -71,7 +73,7 @@ public class DetalleOrdenTrabajoRest implements Serializable{
         }
         return respuesta;
     }
-    @Path("/{id_detalle_orden_trabajo}")
+    @Path("/crear/{id_detalle_orden_trabajo}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -79,7 +81,7 @@ public class DetalleOrdenTrabajoRest implements Serializable{
         ejbDetalleOrden.create(detalleOrdenTrabajo);
         return Response.status(Response.Status.CREATED).entity(detalleOrdenTrabajo).build();
     }
-    @Path("/{id_detalle_orden_trabajo}")
+    @Path("/modificar/{id_detalle_orden_trabajo}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_detalle_orden_trabajo") Integer id_detalle_orden_trabajo, DetalleOrdenTrabajo detalleOrdenTrabajo) {

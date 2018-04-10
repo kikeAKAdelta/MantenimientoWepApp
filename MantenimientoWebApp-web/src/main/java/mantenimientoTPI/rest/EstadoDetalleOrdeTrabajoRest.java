@@ -28,7 +28,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.EstadoDetalleOrdenTrabajoFacade
 @Path("/estadoDetalle")
 public class EstadoDetalleOrdeTrabajoRest implements Serializable{
     
-     @EJB
+    @EJB
     private EstadoDetalleOrdenTrabajoFacadeLocal ejbEstadoDetalleOrdenTrabajo;
     
     @GET
@@ -51,7 +51,7 @@ public class EstadoDetalleOrdeTrabajoRest implements Serializable{
         return 0;
     }
     
-    @Path("/{id_estadoDetalleOrdenTrabajo}")
+    @Path("/buscarporid/{id_estadoDetalleOrdenTrabajo}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public EstadoDetalleOrdenTrabajo findById(@PathParam("id_estadoDetalleOrdenTrabajo") Integer id_estadoDetalleOrdenTrabajo){
@@ -61,7 +61,7 @@ public class EstadoDetalleOrdeTrabajoRest implements Serializable{
         return new EstadoDetalleOrdenTrabajo();
     }
     
-    @Path("/{id_estadoDetalleOrdenTrabajo}")
+    @Path("/borrar/{id_estadoDetalleOrdenTrabajo}")
     @DELETE
     public Response remove(@PathParam("id_estadoDetalleOrdenTrabajo") Integer id_estadoDetalleOrdenTrabajo){
         EstadoDetalleOrdenTrabajo a = new EstadoDetalleOrdenTrabajo(id_estadoDetalleOrdenTrabajo);
@@ -72,7 +72,7 @@ public class EstadoDetalleOrdeTrabajoRest implements Serializable{
         }
         return respuesta;
     }
-    @Path("/{id_estadoDetalleOrdenTrabajo}")
+    @Path("/crear/{id_estadoDetalleOrdenTrabajo}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -81,7 +81,7 @@ public class EstadoDetalleOrdeTrabajoRest implements Serializable{
         return Response.status(Response.Status.CREATED).entity(estadoDetalleOrdenTrabajo).build();
     }
     
-    @Path("/{id_estadoDetalleOrdenTrabajo}")
+    @Path("/modificar/{id_estadoDetalleOrdenTrabajo}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_estadoDetalleOrdenTrabajo") Integer id_estadoDetalleOrdenTrabajo, EstadoDetalleOrdenTrabajo estadoDetalleOrdenTrabajo) {

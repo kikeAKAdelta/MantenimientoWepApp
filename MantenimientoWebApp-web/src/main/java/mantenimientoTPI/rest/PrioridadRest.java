@@ -8,6 +8,8 @@ package mantenimientoTPI.rest;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -27,8 +29,12 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.PrioridadFacadeLocal;
  */
 @Path("/prioridad")
 public class PrioridadRest implements Serializable{
+    
     @EJB
     private PrioridadFacadeLocal ejbPrioridad;
+    
+    @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-web_war_1.0-SNAPSHOTPU")
+    private EntityManager em = null;    
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -50,7 +56,7 @@ public class PrioridadRest implements Serializable{
         return 0;
     }
     
-    @Path("/{id_prioridad}")
+    @Path("/buscarporid/{id_prioridad}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Prioridad findById(@PathParam("id_prioridad") Integer id_prioridad){
@@ -60,7 +66,7 @@ public class PrioridadRest implements Serializable{
         return new Prioridad();
     }
     
-    @Path("/{id_prioridad}")
+    @Path("/borrar/{id_prioridad}")
     @DELETE
     public Response remove(@PathParam("id_prioridad") Integer id_prioridad){
         Prioridad a = new Prioridad(id_prioridad);
@@ -71,7 +77,7 @@ public class PrioridadRest implements Serializable{
         }
         return respuesta;
     }
-    @Path("/{id_prioridad}")
+    @Path("/crear/{id_prioridad}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -80,7 +86,7 @@ public class PrioridadRest implements Serializable{
         return Response.status(Response.Status.CREATED).entity(prioridad).build();
     }
     
-    @Path("/{id_prioridad}")
+    @Path("/modificar/{id_prioridad}")
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response edit(@PathParam("id_prioridad") Integer id_prioridad, Prioridad prioridad) {
