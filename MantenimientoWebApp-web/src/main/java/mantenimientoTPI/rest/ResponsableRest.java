@@ -87,7 +87,7 @@ public class ResponsableRest implements Serializable{
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbResponsable != null) {
                 ejbResponsable.edit(responsable);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(responsable).build();
             }
         return respuesta;
     }

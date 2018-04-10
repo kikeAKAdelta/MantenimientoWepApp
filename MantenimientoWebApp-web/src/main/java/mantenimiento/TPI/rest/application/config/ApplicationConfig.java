@@ -34,7 +34,7 @@ public class ApplicationConfig extends Application {
         resources.add(mantenimientoTPI.rest.DiagnosticoParteRest.class);
         resources.add(mantenimientoTPI.rest.DiagnosticoRest.class);
         resources.add(mantenimientoTPI.rest.EquipoRest.class);
-        resources.add(mantenimientoTPI.rest.EstadoDetalleOrdeTrabajoRest.class);
+        resources.add(mantenimientoTPI.rest.EstadoDetalleOrdenTrabajoRest.class);
         resources.add(mantenimientoTPI.rest.EstadoRest.class);
         resources.add(mantenimientoTPI.rest.ExcepcionCalendarioRest.class);
         resources.add(mantenimientoTPI.rest.MttoDetalleRest.class);

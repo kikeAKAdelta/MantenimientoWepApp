@@ -88,7 +88,7 @@ public class SubtipoMttoRest implements Serializable{
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbSubtipoMtto != null) {
                 ejbSubtipoMtto.edit(subtipoMtto);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(subtipoMtto).build();
             }
         return respuesta;
     }

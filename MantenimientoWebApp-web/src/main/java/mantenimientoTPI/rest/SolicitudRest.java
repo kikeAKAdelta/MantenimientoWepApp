@@ -88,7 +88,7 @@ public class SolicitudRest implements Serializable{
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbSolicitud != null) {
                 ejbSolicitud.edit(solicitud);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(solicitud).build();
             }
         return respuesta;
     }

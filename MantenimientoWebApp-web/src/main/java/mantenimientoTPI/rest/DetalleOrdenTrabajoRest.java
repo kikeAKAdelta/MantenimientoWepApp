@@ -86,7 +86,7 @@ public class DetalleOrdenTrabajoRest implements Serializable{
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbDetalleOrden != null) {
                 ejbDetalleOrden.edit(detalleOrdenTrabajo);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(detalleOrdenTrabajo).build();
             }
         return respuesta;
     }

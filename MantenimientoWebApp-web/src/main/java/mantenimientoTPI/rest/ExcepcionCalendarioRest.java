@@ -87,7 +87,7 @@ public class ExcepcionCalendarioRest {
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbExcepcionCalendario != null) {
                 ejbExcepcionCalendario.edit(calendario);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(calendario).build();
             }
         return respuesta;
     }

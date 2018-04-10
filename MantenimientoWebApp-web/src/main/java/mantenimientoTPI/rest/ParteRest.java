@@ -87,7 +87,7 @@ public class ParteRest implements Serializable{
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbParte != null) {
                 ejbParte.edit(parte);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(parte).build();
             }
         return respuesta;
     }

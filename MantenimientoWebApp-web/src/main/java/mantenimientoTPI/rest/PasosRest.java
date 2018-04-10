@@ -87,7 +87,7 @@ public class PasosRest {
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbPasos != null) {
                 ejbPasos.edit(pasos);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(pasos).build();
             }
         return respuesta;
     }

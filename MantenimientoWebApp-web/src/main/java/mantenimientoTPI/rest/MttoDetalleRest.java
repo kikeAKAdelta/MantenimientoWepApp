@@ -89,7 +89,7 @@ public class MttoDetalleRest implements Serializable{
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbMantenimiento != null) {
                 ejbMantenimiento.edit(mantenimiento);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(mantenimiento).build();
             }
         return respuesta;
     }
