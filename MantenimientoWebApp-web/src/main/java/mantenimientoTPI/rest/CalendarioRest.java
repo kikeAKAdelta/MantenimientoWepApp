@@ -90,7 +90,7 @@ public class CalendarioRest implements Serializable{
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbCalendario != null) {
                 ejbCalendario.edit(calendario);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(calendario).build();
             }
         return respuesta;
     }

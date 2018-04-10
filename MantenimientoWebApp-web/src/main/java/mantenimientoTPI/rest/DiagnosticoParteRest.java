@@ -90,7 +90,7 @@ public class DiagnosticoParteRest implements Serializable{
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbDiagnosticoParte != null) {
                 ejbDiagnosticoParte.edit(diagnostico);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(diagnostico).build();
             }
         return respuesta;
     }

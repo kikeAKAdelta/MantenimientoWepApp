@@ -94,7 +94,7 @@ public class ProcedimientoRest implements Serializable{
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbProcedimiento != null) {
                 ejbProcedimiento.edit(procedimiento);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(procedimiento).build();
             }
         return respuesta;
     }

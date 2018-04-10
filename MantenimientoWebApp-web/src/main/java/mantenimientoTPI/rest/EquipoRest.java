@@ -91,7 +91,7 @@ public class EquipoRest implements Serializable{
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbEquipo != null) {
                 ejbEquipo.edit(equipo);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(equipo).build();
             }
         return respuesta;
     }

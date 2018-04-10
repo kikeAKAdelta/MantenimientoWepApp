@@ -94,7 +94,7 @@ public class TipomttoRest implements Serializable{
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbTipoMtto != null) {
                 ejbTipoMtto.edit(tipomtto);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(tipomtto).build();
             }
         return respuesta;
     }

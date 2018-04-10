@@ -26,9 +26,9 @@ import sv.edu.uesocc.ingenieria.tpi2018.sessions.EstadoDetalleOrdenTrabajoFacade
  * @author degon
  */
 @Path("/estadoDetalle")
-public class EstadoDetalleOrdeTrabajoRest implements Serializable{
+public class EstadoDetalleOrdenTrabajoRest implements Serializable{
     
-    @EJB
+     @EJB
     private EstadoDetalleOrdenTrabajoFacadeLocal ejbEstadoDetalleOrdenTrabajo;
     
     @GET
@@ -88,7 +88,7 @@ public class EstadoDetalleOrdeTrabajoRest implements Serializable{
         Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
             if (this.ejbEstadoDetalleOrdenTrabajo != null) {
                 ejbEstadoDetalleOrdenTrabajo.edit(estadoDetalleOrdenTrabajo);
-                respuesta = Response.status(Response.Status.OK).build();
+                respuesta=Response.status(Response.Status.OK).entity(estadoDetalleOrdenTrabajo).build();
             }
         return respuesta;
     }
