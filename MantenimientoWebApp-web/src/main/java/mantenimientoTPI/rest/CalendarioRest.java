@@ -19,6 +19,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import sv.edu.uesocc.ingenieria.tpi2018.sessions.CalendarioFacadeLocal;
 import sv.edu.uesocc.ingenieria.mantenimientolib.Calendario;
 
@@ -27,6 +29,9 @@ import sv.edu.uesocc.ingenieria.mantenimientolib.Calendario;
  *
  * @author degon
  */
+
+@RestController
+@RequestMapping
 @Path("/calendario")
 public class CalendarioRest implements Serializable{
     @EJB
