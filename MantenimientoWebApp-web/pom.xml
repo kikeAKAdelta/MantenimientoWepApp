@@ -132,6 +132,46 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+            <groupId>com.dkanejs.maven.plugins</groupId>
+            <artifactId>docker-compose-maven-plugin</artifactId>
+            <version>1.0.3</version>
+            <executions>
+               
+                <execution>
+                    <id>up</id>
+                    <phase>install</phase>
+                    <goals>
+                        <goal>up</goal>
+                   
+                    </goals>
+                    <configuration>
+                        <composeFile>${project.basedir}/recursos/docker-compose.yml</composeFile>
+                        <detachedMode>true</detachedMode>
+                        
+                    </configuration>
+                </execution>
+            </executions>    
+        </plugin>   
+      
+       
+    
+                <plugin>
+  <artifactId>exec-maven-plugin</artifactId>
+  <groupId>org.codehaus.mojo</groupId>
+  <executions>
+    <execution><!-- Borrar el contenedor -->
+      <id>Borrar contenedores</id>
+      <phase>generate-sources</phase>
+      <goals>
+        <goal>exec</goal>
+      </goals>
+      <configuration>
+        <executable>${basedir}/recursos/start.sh</executable>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
         </plugins>
     </build>
        <repositories>
