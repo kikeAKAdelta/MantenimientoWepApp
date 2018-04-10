@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="6" failures="0" name="mantenimientoTPI.rest.ResponsableRestTest" time="0.006" errors="0" skipped="0">
+<testsuite tests="6" failures="0" name="mantenimientoTPI.rest.ResponsableRestTest" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/home/ricky/jdk1.8.0_141/jre/lib/amd64"/>
@@ -64,6 +64,6 @@
   <testcase classname="mantenimientoTPI.rest.ResponsableRestTest" name="testCount" time="0"/>
   <testcase classname="mantenimientoTPI.rest.ResponsableRestTest" name="testFindById" time="0"/>
   <testcase classname="mantenimientoTPI.rest.ResponsableRestTest" name="testRemove" time="0"/>
-  <testcase classname="mantenimientoTPI.rest.ResponsableRestTest" name="testCreate" time="0.006"/>
+  <testcase classname="mantenimientoTPI.rest.ResponsableRestTest" name="testCreate" time="0"/>
   <testcase classname="mantenimientoTPI.rest.ResponsableRestTest" name="testEdit" time="0"/>
 </testsuite>

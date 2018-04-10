@@ -64,6 +64,6 @@
   <testcase classname="mantenimientoTPI.rest.ExcepcionCalendarioRestTest" name="testCount" time="0"/>
   <testcase classname="mantenimientoTPI.rest.ExcepcionCalendarioRestTest" name="testFindById" time="0"/>
   <testcase classname="mantenimientoTPI.rest.ExcepcionCalendarioRestTest" name="testRemove" time="0"/>
-  <testcase classname="mantenimientoTPI.rest.ExcepcionCalendarioRestTest" name="testCreate" time="0"/>
+  <testcase classname="mantenimientoTPI.rest.ExcepcionCalendarioRestTest" name="testCreate" time="0.001"/>
   <testcase classname="mantenimientoTPI.rest.ExcepcionCalendarioRestTest" name="testEdit" time="0"/>
 </testsuite>

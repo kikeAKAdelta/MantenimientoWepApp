@@ -49,7 +49,7 @@ public class UnidadRest {
         return 0;
     }
     
-    @Path("/{id_unidad}")
+    @Path("/buscarporid/{id_unidad}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Unidad findById(@PathParam("id_unidad") Integer id_unidad){

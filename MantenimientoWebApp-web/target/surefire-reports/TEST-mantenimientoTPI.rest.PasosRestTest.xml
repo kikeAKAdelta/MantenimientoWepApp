@@ -62,8 +62,8 @@
   </properties>
   <testcase classname="mantenimientoTPI.rest.PasosRestTest" name="testFindAll" time="0"/>
   <testcase classname="mantenimientoTPI.rest.PasosRestTest" name="testCount" time="0"/>
-  <testcase classname="mantenimientoTPI.rest.PasosRestTest" name="testFindById" time="0.001"/>
+  <testcase classname="mantenimientoTPI.rest.PasosRestTest" name="testFindById" time="0"/>
   <testcase classname="mantenimientoTPI.rest.PasosRestTest" name="testRemove" time="0"/>
   <testcase classname="mantenimientoTPI.rest.PasosRestTest" name="testCreate" time="0"/>
-  <testcase classname="mantenimientoTPI.rest.PasosRestTest" name="testEdit" time="0"/>
+  <testcase classname="mantenimientoTPI.rest.PasosRestTest" name="testEdit" time="0.001"/>
 </testsuite>
