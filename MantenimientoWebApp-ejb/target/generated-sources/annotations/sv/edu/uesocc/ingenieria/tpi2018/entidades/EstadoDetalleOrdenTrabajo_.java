@@ -7,7 +7,7 @@ import sv.edu.uesocc.ingenieria.tpi2018.entidades.DetalleOrdenTrabajo;
 import sv.edu.uesocc.ingenieria.tpi2018.entidades.Estado;
 import sv.edu.uesocc.ingenieria.tpi2018.entidades.EstadoDetalleOrdenTrabajoPK;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-04-08T22:59:46")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-04-10T12:33:37")
 @StaticMetamodel(EstadoDetalleOrdenTrabajo.class)
 public class EstadoDetalleOrdenTrabajo_ { 
 

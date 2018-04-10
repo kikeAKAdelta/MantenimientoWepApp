@@ -42,6 +42,10 @@ public class EstadoDetalleOrdenTrabajo implements Serializable {
         this.estadoDetalleOrdenTrabajoPK = estadoDetalleOrdenTrabajoPK;
     }
 
+    public EstadoDetalleOrdenTrabajo(Integer id_estadoDetalleOrdenTrabajo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public EstadoDetalleOrdenTrabajoPK getEstadoDetalleOrdenTrabajoPK() {
         return estadoDetalleOrdenTrabajoPK;
     }
