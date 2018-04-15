@@ -10,10 +10,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import sv.edu.uesocc.ingenieria.mantenimientolib.Procedimiento;
 
-
 /**
  *
- * @author ricky
+ * @author david
  */
 @Stateless
 public class ProcedimientoFacade extends AbstractFacade<Procedimiento> implements ProcedimientoFacadeLocal {

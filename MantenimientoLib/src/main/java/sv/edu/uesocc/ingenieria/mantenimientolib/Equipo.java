@@ -10,22 +10,19 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author degon
+ * @author david
  */
 @Entity
 @Table(name = "equipo")
@@ -33,26 +30,26 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Equipo.findAll", query = "SELECT e FROM Equipo e")
     , @NamedQuery(name = "Equipo.findByIdEquipo", query = "SELECT e FROM Equipo e WHERE e.idEquipo = :idEquipo")
-    , @NamedQuery(name = "Equipo.findByNumeroInventario", query = "SELECT e FROM Equipo e WHERE e.numeroInventario = :numeroInventario")
-    , @NamedQuery(name = "Equipo.findByDescripcion", query = "SELECT e FROM Equipo e WHERE e.descripcion = :descripcion")})
+    , @NamedQuery(name = "Equipo.findBySerie", query = "SELECT e FROM Equipo e WHERE e.serie = :serie")
+    , @NamedQuery(name = "Equipo.findByUnidad", query = "SELECT e FROM Equipo e WHERE e.unidad = :unidad")})
+public class Equipo implements Serializable {
 
-public class Equipo implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "id_equipo")
     private Integer idEquipo;
-    @Column(name = "numero_inventario")
-    private Integer numeroInventario;
-    @Size(max = 100)
-    @Column(name = "descripcion")
-    private String descripcion;
+    @Size(max = 2147483647)
+    @Column(name = "serie")
+    private String serie;
+    @Size(max = 2147483647)
+    @Column(name = "unidad")
+    private String unidad;
     @OneToMany(mappedBy = "idEquipo")
-    private List<Parte> parteList;
-    @JoinColumn(name = "id_unidad", referencedColumnName = "id_unidad")
-    @ManyToOne
-    private Unidad idUnidad;
+    private List<DetalleEquipo> detalleEquipoList;
+    @OneToMany(mappedBy = "idEquipo")
+    private List<Solicitud> solicitudList;
 
     public Equipo() {
     }
@@ -69,37 +66,38 @@ public class Equipo implements Serializable{
         this.idEquipo = idEquipo;
     }
 
-    public Integer getNumeroInventario() {
-        return numeroInventario;
+    public String getSerie() {
+        return serie;
     }
 
-    public void setNumeroInventario(Integer numeroInventario) {
-        this.numeroInventario = numeroInventario;
+    public void setSerie(String serie) {
+        this.serie = serie;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getUnidad() {
+        return unidad;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setUnidad(String unidad) {
+        this.unidad = unidad;
     }
 
     @XmlTransient
-    public List<Parte> getParteList() {
-        return parteList;
+    public List<DetalleEquipo> getDetalleEquipoList() {
+        return detalleEquipoList;
     }
 
-    public void setParteList(List<Parte> parteList) {
-        this.parteList = parteList;
+    public void setDetalleEquipoList(List<DetalleEquipo> detalleEquipoList) {
+        this.detalleEquipoList = detalleEquipoList;
     }
 
-    public Unidad getIdUnidad() {
-        return idUnidad;
+    @XmlTransient
+    public List<Solicitud> getSolicitudList() {
+        return solicitudList;
     }
 
-    public void setIdUnidad(Unidad idUnidad) {
-        this.idUnidad = idUnidad;
+    public void setSolicitudList(List<Solicitud> solicitudList) {
+        this.solicitudList = solicitudList;
     }
 
     @Override
@@ -124,6 +122,7 @@ public class Equipo implements Serializable{
 
     @Override
     public String toString() {
-        return "org.mantenimiento.tpi.mantenimientolib.Equipo[ idEquipo=" + idEquipo + " ]";
+        return "sv.edu.uesocc.ingenieria.mantenimientolib.Equipo[ idEquipo=" + idEquipo + " ]";
     }
+    
 }

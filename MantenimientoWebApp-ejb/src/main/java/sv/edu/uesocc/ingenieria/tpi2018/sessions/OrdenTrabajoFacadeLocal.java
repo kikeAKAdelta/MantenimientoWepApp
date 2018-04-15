@@ -11,7 +11,7 @@ import sv.edu.uesocc.ingenieria.mantenimientolib.OrdenTrabajo;
 
 /**
  *
- * @author ricky
+ * @author david
  */
 @Local
 public interface OrdenTrabajoFacadeLocal {

@@ -10,10 +10,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import sv.edu.uesocc.ingenieria.mantenimientolib.DiagnosticoParte;
 
-
 /**
  *
- * @author ricky
+ * @author david
  */
 @Stateless
 public class DiagnosticoParteFacade extends AbstractFacade<DiagnosticoParte> implements DiagnosticoParteFacadeLocal {

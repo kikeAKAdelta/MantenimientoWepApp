@@ -10,23 +10,21 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author degon
+ * @author david
  */
 @Entity
 @Table(name = "procedimiento")
@@ -34,26 +32,25 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Procedimiento.findAll", query = "SELECT p FROM Procedimiento p")
     , @NamedQuery(name = "Procedimiento.findByIdProcedimiento", query = "SELECT p FROM Procedimiento p WHERE p.idProcedimiento = :idProcedimiento")
-    , @NamedQuery(name = "Procedimiento.findByDescripcion", query = "SELECT p FROM Procedimiento p WHERE p.descripcion = :descripcion")})
+    , @NamedQuery(name = "Procedimiento.findByProcedimiento", query = "SELECT p FROM Procedimiento p WHERE p.procedimiento = :procedimiento")})
+public class Procedimiento implements Serializable {
 
-public class Procedimiento implements Serializable{
-    
-     private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "id_procedimiento")
     private Integer idProcedimiento;
-    @Size(max = 100)
-    @Column(name = "descripcion")
-    private String descripcion;
-    @ManyToMany(mappedBy = "procedimientoList")
-    private List<Pasos> pasosList;
-    @OneToMany(mappedBy = "idProcedimiento")
-    private List<Estado> estadoList;
-    @JoinColumn(name = "id_diagnostico", referencedColumnName = "id_diagnostico")
+    @Size(max = 2147483647)
+    @Column(name = "procedimiento")
+    private String procedimiento;
+    @JoinColumn(name = "id_pasos", referencedColumnName = "id_paso")
     @ManyToOne
-    private Diagnostico idDiagnostico;
+    private Pasos idPasos;
+    @OneToMany(mappedBy = "idProcedimiento")
+    private List<Diagnostico> diagnosticoList;
+    @OneToMany(mappedBy = "idProcedimiento")
+    private List<EstadoDetalleMantenimiento> estadoDetalleMantenimientoList;
 
     public Procedimiento() {
     }
@@ -70,38 +67,38 @@ public class Procedimiento implements Serializable{
         this.idProcedimiento = idProcedimiento;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getProcedimiento() {
+        return procedimiento;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setProcedimiento(String procedimiento) {
+        this.procedimiento = procedimiento;
+    }
+
+    public Pasos getIdPasos() {
+        return idPasos;
+    }
+
+    public void setIdPasos(Pasos idPasos) {
+        this.idPasos = idPasos;
     }
 
     @XmlTransient
-    public List<Pasos> getPasosList() {
-        return pasosList;
+    public List<Diagnostico> getDiagnosticoList() {
+        return diagnosticoList;
     }
 
-    public void setPasosList(List<Pasos> pasosList) {
-        this.pasosList = pasosList;
+    public void setDiagnosticoList(List<Diagnostico> diagnosticoList) {
+        this.diagnosticoList = diagnosticoList;
     }
 
     @XmlTransient
-    public List<Estado> getEstadoList() {
-        return estadoList;
+    public List<EstadoDetalleMantenimiento> getEstadoDetalleMantenimientoList() {
+        return estadoDetalleMantenimientoList;
     }
 
-    public void setEstadoList(List<Estado> estadoList) {
-        this.estadoList = estadoList;
-    }
-
-    public Diagnostico getIdDiagnostico() {
-        return idDiagnostico;
-    }
-
-    public void setIdDiagnostico(Diagnostico idDiagnostico) {
-        this.idDiagnostico = idDiagnostico;
+    public void setEstadoDetalleMantenimientoList(List<EstadoDetalleMantenimiento> estadoDetalleMantenimientoList) {
+        this.estadoDetalleMantenimientoList = estadoDetalleMantenimientoList;
     }
 
     @Override
@@ -126,6 +123,7 @@ public class Procedimiento implements Serializable{
 
     @Override
     public String toString() {
-        return "org.mantenimiento.tpi.mantenimientolib.Procedimiento[ idProcedimiento=" + idProcedimiento + " ]";
+        return "sv.edu.uesocc.ingenieria.mantenimientolib.Procedimiento[ idProcedimiento=" + idProcedimiento + " ]";
     }
+    
 }

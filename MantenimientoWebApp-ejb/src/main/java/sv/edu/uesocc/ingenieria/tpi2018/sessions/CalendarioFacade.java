@@ -16,6 +16,7 @@ import sv.edu.uesocc.ingenieria.mantenimientolib.Calendario;
  */
 @Stateless
 public class CalendarioFacade extends AbstractFacade<Calendario> implements CalendarioFacadeLocal {
+
     @PersistenceContext(unitName = "sv.edu.uesocc.ingenieria_MantenimientoWebApp-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -27,4 +28,5 @@ public class CalendarioFacade extends AbstractFacade<Calendario> implements Cale
     public CalendarioFacade() {
         super(Calendario.class);
     }
+    
 }

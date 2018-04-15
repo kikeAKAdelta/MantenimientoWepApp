@@ -6,92 +6,93 @@
 package sv.edu.uesocc.ingenieria.mantenimientolib;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author degon
+ * @author david
  */
 @Entity
 @Table(name = "diagnostico_parte")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "DiagnosticoParte.findAll", query = "SELECT d FROM DiagnosticoParte d")
-    , @NamedQuery(name = "DiagnosticoParte.findByIdDiagnostico", query = "SELECT d FROM DiagnosticoParte d WHERE d.diagnosticoPartePK.idDiagnostico = :idDiagnostico")
-    , @NamedQuery(name = "DiagnosticoParte.findByIdParte", query = "SELECT d FROM DiagnosticoParte d WHERE d.diagnosticoPartePK.idParte = :idParte")
-    , @NamedQuery(name = "DiagnosticoParte.findByDescripcion", query = "SELECT d FROM DiagnosticoParte d WHERE d.descripcion = :descripcion")})
+    , @NamedQuery(name = "DiagnosticoParte.findByIdDiagnosticoParte", query = "SELECT d FROM DiagnosticoParte d WHERE d.idDiagnosticoParte = :idDiagnosticoParte")
+    , @NamedQuery(name = "DiagnosticoParte.findByParte", query = "SELECT d FROM DiagnosticoParte d WHERE d.parte = :parte")
+    , @NamedQuery(name = "DiagnosticoParte.findByObservaciones", query = "SELECT d FROM DiagnosticoParte d WHERE d.observaciones = :observaciones")})
+public class DiagnosticoParte implements Serializable {
 
-public class DiagnosticoParte implements Serializable{
-    
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected DiagnosticoPartePK diagnosticoPartePK;
-    @Size(max = 100)
-    @Column(name = "descripcion")
-    private String descripcion;
-    @JoinColumn(name = "id_diagnostico", referencedColumnName = "id_diagnostico", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Diagnostico diagnostico;
-    @JoinColumn(name = "id_parte", referencedColumnName = "id_parte", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Parte parte;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "id_diagnostico_parte")
+    private Integer idDiagnosticoParte;
+    @Size(max = 2147483647)
+    @Column(name = "parte")
+    private String parte;
+    @Size(max = 2147483647)
+    @Column(name = "observaciones")
+    private String observaciones;
+    @OneToMany(mappedBy = "idDiagnosticoParte")
+    private List<Diagnostico> diagnosticoList;
 
     public DiagnosticoParte() {
     }
 
-    public DiagnosticoParte(DiagnosticoPartePK diagnosticoPartePK) {
-        this.diagnosticoPartePK = diagnosticoPartePK;
+    public DiagnosticoParte(Integer idDiagnosticoParte) {
+        this.idDiagnosticoParte = idDiagnosticoParte;
     }
 
-    public DiagnosticoParte(int idDiagnostico, int idParte) {
-        this.diagnosticoPartePK = new DiagnosticoPartePK(idDiagnostico, idParte);
+    public Integer getIdDiagnosticoParte() {
+        return idDiagnosticoParte;
     }
 
-    public DiagnosticoPartePK getDiagnosticoPartePK() {
-        return diagnosticoPartePK;
+    public void setIdDiagnosticoParte(Integer idDiagnosticoParte) {
+        this.idDiagnosticoParte = idDiagnosticoParte;
     }
 
-    public void setDiagnosticoPartePK(DiagnosticoPartePK diagnosticoPartePK) {
-        this.diagnosticoPartePK = diagnosticoPartePK;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Diagnostico getDiagnostico() {
-        return diagnostico;
-    }
-
-    public void setDiagnostico(Diagnostico diagnostico) {
-        this.diagnostico = diagnostico;
-    }
-
-    public Parte getParte() {
+    public String getParte() {
         return parte;
     }
 
-    public void setParte(Parte parte) {
+    public void setParte(String parte) {
         this.parte = parte;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
+    @XmlTransient
+    public List<Diagnostico> getDiagnosticoList() {
+        return diagnosticoList;
+    }
+
+    public void setDiagnosticoList(List<Diagnostico> diagnosticoList) {
+        this.diagnosticoList = diagnosticoList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (diagnosticoPartePK != null ? diagnosticoPartePK.hashCode() : 0);
+        hash += (idDiagnosticoParte != null ? idDiagnosticoParte.hashCode() : 0);
         return hash;
     }
 
@@ -102,7 +103,7 @@ public class DiagnosticoParte implements Serializable{
             return false;
         }
         DiagnosticoParte other = (DiagnosticoParte) object;
-        if ((this.diagnosticoPartePK == null && other.diagnosticoPartePK != null) || (this.diagnosticoPartePK != null && !this.diagnosticoPartePK.equals(other.diagnosticoPartePK))) {
+        if ((this.idDiagnosticoParte == null && other.idDiagnosticoParte != null) || (this.idDiagnosticoParte != null && !this.idDiagnosticoParte.equals(other.idDiagnosticoParte))) {
             return false;
         }
         return true;
@@ -110,6 +111,7 @@ public class DiagnosticoParte implements Serializable{
 
     @Override
     public String toString() {
-        return "org.mantenimiento.tpi.mantenimientolib.DiagnosticoParte[ diagnosticoPartePK=" + diagnosticoPartePK + " ]";
+        return "sv.edu.uesocc.ingenieria.mantenimientolib.DiagnosticoParte[ idDiagnosticoParte=" + idDiagnosticoParte + " ]";
     }
+    
 }

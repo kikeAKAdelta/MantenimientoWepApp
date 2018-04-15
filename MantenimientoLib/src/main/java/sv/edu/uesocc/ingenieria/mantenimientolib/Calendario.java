@@ -11,22 +11,23 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author degon
+ * @author david
  */
 @Entity
 @Table(name = "calendario")
@@ -34,24 +35,42 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Calendario.findAll", query = "SELECT c FROM Calendario c")
     , @NamedQuery(name = "Calendario.findByIdCalendario", query = "SELECT c FROM Calendario c WHERE c.idCalendario = :idCalendario")
-    , @NamedQuery(name = "Calendario.findByFecha", query = "SELECT c FROM Calendario c WHERE c.fecha = :fecha")
-    , @NamedQuery(name = "Calendario.findByDescripcion", query = "SELECT c FROM Calendario c WHERE c.descripcion = :descripcion")})
-public class Calendario implements Serializable{
-    
+    , @NamedQuery(name = "Calendario.findByFechaInicio", query = "SELECT c FROM Calendario c WHERE c.fechaInicio = :fechaInicio")
+    , @NamedQuery(name = "Calendario.findByDecripcion", query = "SELECT c FROM Calendario c WHERE c.decripcion = :decripcion")
+    , @NamedQuery(name = "Calendario.findByResponsable", query = "SELECT c FROM Calendario c WHERE c.responsable = :responsable")
+    , @NamedQuery(name = "Calendario.findByTelefono", query = "SELECT c FROM Calendario c WHERE c.telefono = :telefono")
+    , @NamedQuery(name = "Calendario.findByFechaFin", query = "SELECT c FROM Calendario c WHERE c.fechaFin = :fechaFin")
+    , @NamedQuery(name = "Calendario.findByCantidad", query = "SELECT c FROM Calendario c WHERE c.cantidad = :cantidad")})
+public class Calendario implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "id_calendario")
     private Integer idCalendario;
-    @Column(name = "fecha")
+    @Column(name = "fecha_inicio")
     @Temporal(TemporalType.DATE)
-    private Date fecha;
-    @Size(max = 500)
-    @Column(name = "descripcion")
-    private String descripcion;
+    private Date fechaInicio;
+    @Size(max = 2147483647)
+    @Column(name = "decripcion")
+    private String decripcion;
+    @Size(max = 2147483647)
+    @Column(name = "responsable")
+    private String responsable;
+    @Size(max = 2147483647)
+    @Column(name = "telefono")
+    private String telefono;
+    @Column(name = "fecha_fin")
+    @Temporal(TemporalType.DATE)
+    private Date fechaFin;
+    @Column(name = "cantidad")
+    private Integer cantidad;
     @OneToMany(mappedBy = "idCalendario")
     private List<OrdenTrabajo> ordenTrabajoList;
+    @JoinColumn(name = "id_asuetos", referencedColumnName = "id_asueto")
+    @ManyToOne
+    private Asuetos idAsuetos;
 
     public Calendario() {
     }
@@ -68,20 +87,52 @@ public class Calendario implements Serializable{
         this.idCalendario = idCalendario;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public Date getFechaInicio() {
+        return fechaInicio;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDecripcion() {
+        return decripcion;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDecripcion(String decripcion) {
+        this.decripcion = decripcion;
+    }
+
+    public String getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(String responsable) {
+        this.responsable = responsable;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 
     @XmlTransient
@@ -91,6 +142,14 @@ public class Calendario implements Serializable{
 
     public void setOrdenTrabajoList(List<OrdenTrabajo> ordenTrabajoList) {
         this.ordenTrabajoList = ordenTrabajoList;
+    }
+
+    public Asuetos getIdAsuetos() {
+        return idAsuetos;
+    }
+
+    public void setIdAsuetos(Asuetos idAsuetos) {
+        this.idAsuetos = idAsuetos;
     }
 
     @Override
@@ -115,6 +174,7 @@ public class Calendario implements Serializable{
 
     @Override
     public String toString() {
-        return "org.mantenimiento.tpi.mantenimientolib.Calendario[ idCalendario=" + idCalendario + " ]";
+        return "sv.edu.uesocc.ingenieria.mantenimientolib.Calendario[ idCalendario=" + idCalendario + " ]";
     }
+    
 }

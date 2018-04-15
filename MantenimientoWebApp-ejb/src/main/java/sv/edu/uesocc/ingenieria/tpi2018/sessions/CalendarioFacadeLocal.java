@@ -9,10 +9,9 @@ import java.util.List;
 import javax.ejb.Local;
 import sv.edu.uesocc.ingenieria.mantenimientolib.Calendario;
 
-
 /**
  *
- * @author ricky
+ * @author david
  */
 @Local
 public interface CalendarioFacadeLocal {

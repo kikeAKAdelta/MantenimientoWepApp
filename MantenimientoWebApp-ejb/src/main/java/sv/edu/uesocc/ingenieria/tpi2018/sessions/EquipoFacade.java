@@ -10,10 +10,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import sv.edu.uesocc.ingenieria.mantenimientolib.Equipo;
 
-
 /**
  *
- * @author ricky
+ * @author david
  */
 @Stateless
 public class EquipoFacade extends AbstractFacade<Equipo> implements EquipoFacadeLocal {

@@ -8,10 +8,14 @@ package mantenimientoTPI.rest;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -29,6 +33,7 @@ public class EquipoRest implements Serializable{
     
     @EJB
     private EquipoFacadeLocal ejbEquipo;
+
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -50,7 +55,7 @@ public class EquipoRest implements Serializable{
         return 0;
     }
     
-    @Path("/{id_calendario}")
+    @Path("/buscarporid/{id_equipo}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Equipo findById(@PathParam("id_equipo") Integer id_equipo){
@@ -60,7 +65,7 @@ public class EquipoRest implements Serializable{
         return new Equipo();
     }
     
-    @Path("/{id_equipo}")
+    @Path("/borrar/{id_equipo}")
     @DELETE
     public Response remove(@PathParam("id_equipo") Integer id_equipo){
         Equipo a = new Equipo(id_equipo);
@@ -71,7 +76,7 @@ public class EquipoRest implements Serializable{
         }
         return respuesta;
     }
-    @Path("/{id_calendario}")
+    @Path("/crear/{id_equipo}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -79,4 +84,17 @@ public class EquipoRest implements Serializable{
         ejbEquipo.create(equipo);
         return Response.status(Response.Status.CREATED).entity(equipo).build();
     }
+    @Path("/modificar/{id_equipo}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response edit(@PathParam("id_equipo") Integer id_equipo, Equipo equipo) {
+        Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
+            if (this.ejbEquipo != null) {
+                ejbEquipo.edit(equipo);
+                respuesta=Response.status(Response.Status.OK).entity(equipo).build();
+            }
+        return respuesta;
+    }
+    
+    
 }

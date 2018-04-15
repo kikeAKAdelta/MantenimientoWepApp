@@ -6,12 +6,12 @@
 package sv.edu.uesocc.ingenieria.mantenimientolib;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,13 +19,16 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author degon
+ * @author david
  */
 @Entity
 @Table(name = "orden_trabajo")
@@ -33,32 +36,32 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "OrdenTrabajo.findAll", query = "SELECT o FROM OrdenTrabajo o")
     , @NamedQuery(name = "OrdenTrabajo.findByIdOrdenTrabajo", query = "SELECT o FROM OrdenTrabajo o WHERE o.idOrdenTrabajo = :idOrdenTrabajo")
-    , @NamedQuery(name = "OrdenTrabajo.findByDescripcion", query = "SELECT o FROM OrdenTrabajo o WHERE o.descripcion = :descripcion")})
+    , @NamedQuery(name = "OrdenTrabajo.findByFechaInicio", query = "SELECT o FROM OrdenTrabajo o WHERE o.fechaInicio = :fechaInicio")
+    , @NamedQuery(name = "OrdenTrabajo.findByPrioridad", query = "SELECT o FROM OrdenTrabajo o WHERE o.prioridad = :prioridad")})
+public class OrdenTrabajo implements Serializable {
 
-public class OrdenTrabajo implements Serializable{
-     private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "id_orden_trabajo")
     private Integer idOrdenTrabajo;
-    @Size(max = 100)
-    @Column(name = "descripcion")
-    private String descripcion;
+    @Column(name = "fecha_inicio")
+    @Temporal(TemporalType.DATE)
+    private Date fechaInicio;
+    @Size(max = 2147483647)
+    @Column(name = "prioridad")
+    private String prioridad;
     @JoinColumn(name = "id_calendario", referencedColumnName = "id_calendario")
     @ManyToOne
     private Calendario idCalendario;
-    @JoinColumn(name = "id_prioridad", referencedColumnName = "id_prioridad")
-    @ManyToOne
-    private Prioridad idPrioridad;
     @JoinColumn(name = "id_solicitud", referencedColumnName = "id_solicitud")
     @ManyToOne
     private Solicitud idSolicitud;
-    @JoinColumn(name = "id_tipomtto", referencedColumnName = "id_tipomtto")
-    @ManyToOne
-    private Tipomtto idTipomtto;
     @OneToMany(mappedBy = "idOrdenTrabajo")
-    private List<DetalleOrdenTrabajo> detalleOrdenTrabajoList;
+    private List<DetalleMantenimiento> detalleMantenimientoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenTrabajo")
+    private List<OrdenTrabajoPorTrabajadores> ordenTrabajoPorTrabajadoresList;
 
     public OrdenTrabajo() {
     }
@@ -75,12 +78,20 @@ public class OrdenTrabajo implements Serializable{
         this.idOrdenTrabajo = idOrdenTrabajo;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public Date getFechaInicio() {
+        return fechaInicio;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public String getPrioridad() {
+        return prioridad;
+    }
+
+    public void setPrioridad(String prioridad) {
+        this.prioridad = prioridad;
     }
 
     public Calendario getIdCalendario() {
@@ -91,14 +102,6 @@ public class OrdenTrabajo implements Serializable{
         this.idCalendario = idCalendario;
     }
 
-    public Prioridad getIdPrioridad() {
-        return idPrioridad;
-    }
-
-    public void setIdPrioridad(Prioridad idPrioridad) {
-        this.idPrioridad = idPrioridad;
-    }
-
     public Solicitud getIdSolicitud() {
         return idSolicitud;
     }
@@ -107,21 +110,22 @@ public class OrdenTrabajo implements Serializable{
         this.idSolicitud = idSolicitud;
     }
 
-    public Tipomtto getIdTipomtto() {
-        return idTipomtto;
+    @XmlTransient
+    public List<DetalleMantenimiento> getDetalleMantenimientoList() {
+        return detalleMantenimientoList;
     }
 
-    public void setIdTipomtto(Tipomtto idTipomtto) {
-        this.idTipomtto = idTipomtto;
+    public void setDetalleMantenimientoList(List<DetalleMantenimiento> detalleMantenimientoList) {
+        this.detalleMantenimientoList = detalleMantenimientoList;
     }
 
     @XmlTransient
-    public List<DetalleOrdenTrabajo> getDetalleOrdenTrabajoList() {
-        return detalleOrdenTrabajoList;
+    public List<OrdenTrabajoPorTrabajadores> getOrdenTrabajoPorTrabajadoresList() {
+        return ordenTrabajoPorTrabajadoresList;
     }
 
-    public void setDetalleOrdenTrabajoList(List<DetalleOrdenTrabajo> detalleOrdenTrabajoList) {
-        this.detalleOrdenTrabajoList = detalleOrdenTrabajoList;
+    public void setOrdenTrabajoPorTrabajadoresList(List<OrdenTrabajoPorTrabajadores> ordenTrabajoPorTrabajadoresList) {
+        this.ordenTrabajoPorTrabajadoresList = ordenTrabajoPorTrabajadoresList;
     }
 
     @Override
@@ -146,7 +150,7 @@ public class OrdenTrabajo implements Serializable{
 
     @Override
     public String toString() {
-        return "org.mantenimiento.tpi.mantenimientolib.OrdenTrabajo[ idOrdenTrabajo=" + idOrdenTrabajo + " ]";
+        return "sv.edu.uesocc.ingenieria.mantenimientolib.OrdenTrabajo[ idOrdenTrabajo=" + idOrdenTrabajo + " ]";
     }
     
 }

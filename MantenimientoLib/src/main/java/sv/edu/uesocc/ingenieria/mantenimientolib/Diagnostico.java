@@ -6,50 +6,47 @@
 package sv.edu.uesocc.ingenieria.mantenimientolib;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author degon
+ * @author david
  */
-
 @Entity
 @Table(name = "diagnostico")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Diagnostico.findAll", query = "SELECT d FROM Diagnostico d")
     , @NamedQuery(name = "Diagnostico.findByIdDiagnostico", query = "SELECT d FROM Diagnostico d WHERE d.idDiagnostico = :idDiagnostico")
-    , @NamedQuery(name = "Diagnostico.findByDescripcion", query = "SELECT d FROM Diagnostico d WHERE d.descripcion = :descripcion")})
+    , @NamedQuery(name = "Diagnostico.findByDiagnostico", query = "SELECT d FROM Diagnostico d WHERE d.diagnostico = :diagnostico")})
+public class Diagnostico implements Serializable {
 
-public class Diagnostico implements Serializable{
-    
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "id_diagnostico")
     private Integer idDiagnostico;
-    @Size(max = 100)
-    @Column(name = "descripcion")
-    private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "diagnostico")
-    private List<DiagnosticoParte> diagnosticoParteList;
-    @OneToMany(mappedBy = "idDiagnostico")
-    private List<Procedimiento> procedimientoList;
+    @Size(max = 2147483647)
+    @Column(name = "diagnostico")
+    private String diagnostico;
+    @JoinColumn(name = "id_diagnostico_parte", referencedColumnName = "id_diagnostico_parte")
+    @ManyToOne
+    private DiagnosticoParte idDiagnosticoParte;
+    @JoinColumn(name = "id_procedimiento", referencedColumnName = "id_procedimiento")
+    @ManyToOne
+    private Procedimiento idProcedimiento;
 
     public Diagnostico() {
     }
@@ -66,30 +63,28 @@ public class Diagnostico implements Serializable{
         this.idDiagnostico = idDiagnostico;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDiagnostico() {
+        return diagnostico;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
     }
 
-    @XmlTransient
-    public List<DiagnosticoParte> getDiagnosticoParteList() {
-        return diagnosticoParteList;
+    public DiagnosticoParte getIdDiagnosticoParte() {
+        return idDiagnosticoParte;
     }
 
-    public void setDiagnosticoParteList(List<DiagnosticoParte> diagnosticoParteList) {
-        this.diagnosticoParteList = diagnosticoParteList;
+    public void setIdDiagnosticoParte(DiagnosticoParte idDiagnosticoParte) {
+        this.idDiagnosticoParte = idDiagnosticoParte;
     }
 
-    @XmlTransient
-    public List<Procedimiento> getProcedimientoList() {
-        return procedimientoList;
+    public Procedimiento getIdProcedimiento() {
+        return idProcedimiento;
     }
 
-    public void setProcedimientoList(List<Procedimiento> procedimientoList) {
-        this.procedimientoList = procedimientoList;
+    public void setIdProcedimiento(Procedimiento idProcedimiento) {
+        this.idProcedimiento = idProcedimiento;
     }
 
     @Override
@@ -114,6 +109,7 @@ public class Diagnostico implements Serializable{
 
     @Override
     public String toString() {
-        return "org.mantenimiento.tpi.mantenimientolib.Diagnostico[ idDiagnostico=" + idDiagnostico + " ]";
+        return "sv.edu.uesocc.ingenieria.mantenimientolib.Diagnostico[ idDiagnostico=" + idDiagnostico + " ]";
     }
+    
 }

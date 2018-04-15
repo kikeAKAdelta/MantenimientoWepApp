@@ -10,10 +10,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import sv.edu.uesocc.ingenieria.mantenimientolib.Solicitud;
 
-
 /**
  *
- * @author ricky
+ * @author david
  */
 @Stateless
 public class SolicitudFacade extends AbstractFacade<Solicitud> implements SolicitudFacadeLocal {

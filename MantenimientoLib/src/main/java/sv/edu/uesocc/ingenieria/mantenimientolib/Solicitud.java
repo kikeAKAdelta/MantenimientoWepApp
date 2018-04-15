@@ -11,8 +11,6 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,12 +20,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
 /**
  *
- * @author degon
+ * @author david
  */
 @Entity
 @Table(name = "solicitud")
@@ -35,32 +35,43 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Solicitud.findAll", query = "SELECT s FROM Solicitud s")
     , @NamedQuery(name = "Solicitud.findByIdSolicitud", query = "SELECT s FROM Solicitud s WHERE s.idSolicitud = :idSolicitud")
-    , @NamedQuery(name = "Solicitud.findBySolicitante", query = "SELECT s FROM Solicitud s WHERE s.solicitante = :solicitante")
-    , @NamedQuery(name = "Solicitud.findByDescripcion", query = "SELECT s FROM Solicitud s WHERE s.descripcion = :descripcion")
-    , @NamedQuery(name = "Solicitud.findByFecha", query = "SELECT s FROM Solicitud s WHERE s.fecha = :fecha")})
+    , @NamedQuery(name = "Solicitud.findByFecha", query = "SELECT s FROM Solicitud s WHERE s.fecha = :fecha")
+    , @NamedQuery(name = "Solicitud.findByResponsable", query = "SELECT s FROM Solicitud s WHERE s.responsable = :responsable")
+    , @NamedQuery(name = "Solicitud.findByEmail", query = "SELECT s FROM Solicitud s WHERE s.email = :email")
+    , @NamedQuery(name = "Solicitud.findByTelefono", query = "SELECT s FROM Solicitud s WHERE s.telefono = :telefono")
+    , @NamedQuery(name = "Solicitud.findByDescripcion", query = "SELECT s FROM Solicitud s WHERE s.descripcion = :descripcion")})
+public class Solicitud implements Serializable {
 
-public class Solicitud implements Serializable{
-    
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
     @Column(name = "id_solicitud")
     private Integer idSolicitud;
-    @Size(max = 100)
-    @Column(name = "solicitante")
-    private String solicitante;
-    @Size(max = 100)
-    @Column(name = "descripcion")
-    private String descripcion;
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
+    @Size(max = 2147483647)
+    @Column(name = "responsable")
+    private String responsable;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Correo electrónico no válido")//if the field contains email address consider using this annotation to enforce field validation
+    @Size(max = 2147483647)
+    @Column(name = "email")
+    private String email;
+    @Size(max = 2147483647)
+    @Column(name = "telefono")
+    private String telefono;
+    @Size(max = 2147483647)
+    @Column(name = "descripcion")
+    private String descripcion;
     @OneToMany(mappedBy = "idSolicitud")
     private List<OrdenTrabajo> ordenTrabajoList;
-    @JoinColumn(name = "id_unidad", referencedColumnName = "id_unidad")
+    @JoinColumn(name = "id_equipo", referencedColumnName = "id_equipo")
     @ManyToOne
-    private Unidad idUnidad;
+    private Equipo idEquipo;
+    @JoinColumn(name = "id_tipo_mantenimiento", referencedColumnName = "id_tipo_mantenimiento")
+    @ManyToOne
+    private TipoMantenimiento idTipoMantenimiento;
 
     public Solicitud() {
     }
@@ -77,12 +88,36 @@ public class Solicitud implements Serializable{
         this.idSolicitud = idSolicitud;
     }
 
-    public String getSolicitante() {
-        return solicitante;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setSolicitante(String solicitante) {
-        this.solicitante = solicitante;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(String responsable) {
+        this.responsable = responsable;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getDescripcion() {
@@ -91,14 +126,6 @@ public class Solicitud implements Serializable{
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
     }
 
     @XmlTransient
@@ -110,12 +137,20 @@ public class Solicitud implements Serializable{
         this.ordenTrabajoList = ordenTrabajoList;
     }
 
-    public Unidad getIdUnidad() {
-        return idUnidad;
+    public Equipo getIdEquipo() {
+        return idEquipo;
     }
 
-    public void setIdUnidad(Unidad idUnidad) {
-        this.idUnidad = idUnidad;
+    public void setIdEquipo(Equipo idEquipo) {
+        this.idEquipo = idEquipo;
+    }
+
+    public TipoMantenimiento getIdTipoMantenimiento() {
+        return idTipoMantenimiento;
+    }
+
+    public void setIdTipoMantenimiento(TipoMantenimiento idTipoMantenimiento) {
+        this.idTipoMantenimiento = idTipoMantenimiento;
     }
 
     @Override
@@ -140,7 +175,7 @@ public class Solicitud implements Serializable{
 
     @Override
     public String toString() {
-        return "org.mantenimiento.tpi.mantenimientolib.Solicitud[ idSolicitud=" + idSolicitud + " ]";
+        return "sv.edu.uesocc.ingenieria.mantenimientolib.Solicitud[ idSolicitud=" + idSolicitud + " ]";
     }
     
 }

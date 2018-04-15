@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="sv.edu.uesocc.ingenieria_MantenimientoLib_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Asuetos</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Calendario</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Procedimiento</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Equipo</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Cargo</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Solicitud</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.DetalleMantenimiento</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Diagnostico</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.OrdenTrabajoPorTrabajadores</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Modelo</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Marca</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.OrdenTrabajo</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.TipoMantenimiento</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Pasos</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.Trabajadores</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.DetalleEquipo</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.DiagnosticoParte</class>
+    <class>sv.edu.uesocc.ingenieria.mantenimientolib.EstadoDetalleMantenimiento</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/MantenimientoTPI"/>
+      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="admin"/>
+    </properties>
+  </persistence-unit>
+</persistence>

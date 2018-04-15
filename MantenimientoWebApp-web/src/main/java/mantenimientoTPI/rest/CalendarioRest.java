@@ -6,13 +6,13 @@
 package mantenimientoTPI.rest;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -28,8 +28,10 @@ import sv.edu.uesocc.ingenieria.mantenimientolib.Calendario;
  */
 @Path("/calendario")
 public class CalendarioRest implements Serializable{
+    
     @EJB
     private CalendarioFacadeLocal ejbCalendario;
+    
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -51,7 +53,7 @@ public class CalendarioRest implements Serializable{
         return 0;
     }
     
-    @Path("/{id_calendario}")
+    @Path("/buscarporid/{id_calendario}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Calendario findById(@PathParam("id_calendario") Integer id_calendario){
@@ -61,7 +63,7 @@ public class CalendarioRest implements Serializable{
         return new Calendario();
     }
     
-    @Path("/{id_calendario}")
+    @Path("/borrar/{id_calendario}")
     @DELETE
     public Response remove(@PathParam("id_calendario") Integer id_calendario){
         Calendario a = new Calendario(id_calendario);
@@ -72,7 +74,7 @@ public class CalendarioRest implements Serializable{
         }
         return respuesta;
     }
-    @Path("/{id_calendario}")
+    @Path("/crear/{id_calendario}")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -80,4 +82,17 @@ public class CalendarioRest implements Serializable{
         ejbCalendario.create(calendario);
         return Response.status(Response.Status.CREATED).entity(calendario).build();
     }
+    
+    @Path("/modificar/{id_calendario}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response edit(@PathParam("id_calendario") Integer id_calendario, Calendario calendario) {
+        Response respuesta = Response.status(Response.Status.NOT_FOUND).build();
+            if (this.ejbCalendario != null) {
+                ejbCalendario.edit(calendario);
+                respuesta=Response.status(Response.Status.OK).entity(calendario).build();
+            }
+        return respuesta;
+    }
+    
 }

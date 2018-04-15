@@ -10,10 +10,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import sv.edu.uesocc.ingenieria.mantenimientolib.OrdenTrabajo;
 
-
 /**
  *
- * @author ricky
+ * @author david
  */
 @Stateless
 public class OrdenTrabajoFacade extends AbstractFacade<OrdenTrabajo> implements OrdenTrabajoFacadeLocal {
