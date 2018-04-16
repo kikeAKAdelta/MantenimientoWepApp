@@ -8,7 +8,7 @@ services:
    environment:
      POSTGRES_USER: postgres
      POSTGRES_PASSWORD: 1234
-     POSTGRES_DB: mantenimiento
+     POSTGRES_DB: MantenimientoTPI
    ports:
      - '5430:5432'
    volumes:
