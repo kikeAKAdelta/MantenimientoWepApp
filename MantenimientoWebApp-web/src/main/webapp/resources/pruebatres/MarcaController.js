@@ -3,9 +3,10 @@ class MarcaController extends MarcaResourceClient{
 	constructor(){
             super();
 	}
-        search(){
+       
+    search(){
 		this.mrc=new MarcaResourceClient();
-		this.mrc.findByName("d")
+		this.mrc.findAll()
 		.then(function (res){
                 return res.json();
         })
@@ -13,12 +14,15 @@ class MarcaController extends MarcaResourceClient{
 	        let html = '';
 	        data.forEach(function (marca){
 	        html += ' <option> ${marca.marca} </option>'
+                console.log(marca.marca);
         })
            document.getElementById("browsers").innerHTML=html;
+           
         })
 	}
 
 } 
+
 
 export default MarcaController;
 

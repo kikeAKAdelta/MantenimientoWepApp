@@ -1,3 +1,4 @@
+import MarcaController from './MarcaController.js';
 class ListaCompletado extends HTMLElement{
 
 
@@ -12,29 +13,42 @@ class ListaCompletado extends HTMLElement{
 			//creando un shadow root
 			let shadow=this.attachShadow({mode: 'open','composed':true,'bubbles':true});
 
-			//creando lista
-			let lista=document.createElement('select');
+			//creando datalist
+			let lista=document.createElement('datalist');
 			lista.setAttribute('class', 'lista');	
-			lista.style.width = '200px'; 	
+			lista.style.width = '200px'; 
+                        lista.setAttribute('id','browsers');
 
-			//creando opcion
-			let opcion=document.createElement('option');
-			opcion.setAttribute('value', 'bailar');
-			//opcion.setAttribute('selected', 'true');
-			opcion.setAttribute('label', 'kike');
+			
 
 			//creando input text
 			let inputText=document.createElement('input');
 			inputText.setAttribute('class', 'inputText');
 			inputText.setAttribute('type', 'text');
 			inputText.setAttribute('placeholder', 'Busqueda por nombre...');
-			inputText.setAttribute('event','keypress')
+			inputText.setAttribute('event','keypress');
 
 			//creando boton
 			let boton=document.createElement("input");
 			boton.setAttribute('type', 'button');
 			boton.setAttribute('value', 'Busqueda');
 			boton.style.width='100px';
+                        
+                        //al lio
+                        this.mrc=new MarcaResourceClient();
+                        this.mrc.findAll()
+                        .then(function (res){
+                        return res.json();
+                })
+                .then(function (data){
+                        let html = '';
+                        data.forEach(function (marca){
+                        html += ' <option> ${marca.marca} </option>'
+                        console.log(marca.marca);
+                })
+                   document.getElementById("browsers").innerHTML=html;
+
+                })
 
 
 			//Creando evento
